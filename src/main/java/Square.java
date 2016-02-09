@@ -12,4 +12,10 @@ class Square {
     public int R;
     public int C;
     public int S;
+
+    public Square(int r, int c, int s) {
+        R = r;
+        C = c;
+        S = s;
+    }
 }

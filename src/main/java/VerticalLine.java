@@ -12,4 +12,10 @@ class VerticalLine {
     public int R1;
     public int R2;
     public int C;
+
+    public VerticalLine(int r1, int r2, int c) {
+        R1 = r1;
+        R2 = r2;
+        C = c;
+    }
 }
