@@ -41,6 +41,26 @@ public class Picture {
     public int getBlackCount(){
         return count;
     }
+    
+    /**
+     * Compte le nombre de pixels à colorier dans le sous-rectangle défini
+     * @param R1 Ligne haute gauche
+     * @param C1 Colonne haute gauche
+     * @param R2 Ligne basse droite
+     * @param C2 Colonne basse droite
+     * @return
+     */
+    public int getSubPictureBlackCount(int R1, int C1, int R2, int C2) {
+        int ret = 0;
+        for (int i = R1; i < R2; i++) {
+            for (int j = C1; j < C2; j++) {
+                if (this.getCellValue(i, j) == Color.BLACK) {
+                    ret += 1;
+                }
+            }
+        }
+        return ret;
+    }
 
     @Override
     public Picture clone(){
