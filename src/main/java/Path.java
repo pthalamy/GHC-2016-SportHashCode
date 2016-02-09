@@ -30,6 +30,10 @@ class Path {
         this.destructions.forEach(f -> p.destructions.add(f.clone()));
         return p;
     }
+    
+    public void add(Path anotherPath) {
+        
+    }
 	
     /** Recreates the original picture of dimension N x M from this instance of path */
     public Picture rePaint(int N, int M) {

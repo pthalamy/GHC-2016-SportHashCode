@@ -47,7 +47,7 @@ public class Algo {
         return new Pair<>(new Square(maxI + s, maxJ + s, k), maxValue - s);
     }
     
-    public StepResult stepSquare(Picture currentPicture, Path currentPath) throws Exception {
+    public StepResult stepSquare(Picture currentPicture) throws Exception {
         StepResult ret = new StepResult();
         
         // On cherche la dimension la plus petite entre la largeur
@@ -81,11 +81,10 @@ public class Algo {
             int C1 = square.C - square.S;
             int C2 = square.C + square.S + 1;
             
-            int nbPixels = 0;
             for (int i = R1; i < R2; i++) {
                 for (int j = C1; j < C2; j++) {
                     if (currentPicture.getCellValue(i, j) == Color.BLACK) {
-                        nbPixels += 1;
+                        ret.nbPixel += 1;
                     } else {
                         ret.resultPath.destructions.add(new Destruction(i, j));
                     }
@@ -96,13 +95,13 @@ public class Algo {
         return ret;
     }
     
-    public StepResult stepVerticalLine(Picture currentPicture, Path currentPath) {
+    public StepResult stepVerticalLine(Picture currentPicture) {
         StepResult ret = new StepResult();
         
         return ret;
     }
     
-    public StepResult stepHorizontalLine(Picture currentPicture, Path currentPath) {
+    public StepResult stepHorizontalLine(Picture currentPicture) {
         StepResult ret = new StepResult();
         
         return ret;
@@ -111,15 +110,20 @@ public class Algo {
     
     public StepResult step(Picture currentPicture, Path currentPath) throws Exception {
         // D'abord les carrés
-        StepResult minResult = stepSquare(currentPicture, currentPath);
+        StepResult minResult = stepSquare(currentPicture);
         
         // Puis les lignes
-        StepResult auxResult = stepVerticalLine(currentPicture, currentPath);
+        StepResult auxResult = stepVerticalLine(currentPicture);
         minResult = StepResult.bestStepResult(minResult, auxResult);
         
-        auxResult = stepHorizontalLine(currentPicture, currentPath);
+        auxResult = stepHorizontalLine(currentPicture);
         minResult = StepResult.bestStepResult(minResult, auxResult);
         
+        // Fonction de Mallet permettant la "décoloration"
+        
+        // On check si la décoloration donne une picture vide ou non
+        
+        minResult.resultPath.add(currentPath);
         
         return minResult;
     }
