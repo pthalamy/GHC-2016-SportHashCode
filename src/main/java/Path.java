@@ -21,4 +21,13 @@ class Path {
         return squares.size() + horizontalLines.size() + verticalLines.size()
                 + destructions.size();
     }
+
+    public Path clone(){
+        Path p = new Path();
+        this.squares.forEach(f -> p.squares.add(f.clone()));
+        this.horizontalLines.forEach(f -> p.horizontalLines.add(f.clone()));
+        this.verticalLines.forEach(f -> p.verticalLines.add(f.clone()));
+        this.destructions.forEach(f -> p.destructions.add(f.clone()));
+        return p;
+    }
 }

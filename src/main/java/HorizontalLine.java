@@ -18,4 +18,8 @@ class HorizontalLine {
         C1 = c1;
         C2 = c2;
     }
+
+    public HorizontalLine clone(){
+        return new HorizontalLine(R,C1,C2);
+    }
 }
