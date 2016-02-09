@@ -16,6 +16,11 @@ public class Picture {
         this.M = M;
 
         cell = new Color[N][M];
+        for (int i = 0; i < cell.length; i++) {
+            for (int i1 = 0; i1 < cell[i].length; i1++) {
+                cell[i][i1] = Color.BLANK;
+            }
+        }
     }
 
     public int getN() {
