@@ -60,7 +60,7 @@ public class Main {
                 }
             }
             if(b){
-                path.horizontalLines.add(new HorizontalLine(i,last,pic.getM()));
+                path.horizontalLines.add(new HorizontalLine(i,last,pic.getM()-1));
             }
         }
         return path;
