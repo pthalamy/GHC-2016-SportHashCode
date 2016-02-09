@@ -8,7 +8,7 @@
  *
  * @author airone
  */
-class Destruction {
+public class Destruction {
     public int R;
     public int C;
 

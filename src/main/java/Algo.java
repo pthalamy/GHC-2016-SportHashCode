@@ -1,4 +1,8 @@
 
+import static java.util.Locale.filter;
+import java.util.function.Predicate;
+
+
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -23,16 +27,16 @@ public class Algo {
         int maxJ = 0;
         int maxValue = 0;
         int tempValue;
-        for (int i = 0; i < currentPicture.getN() - k; i++) {
-            for (int j = 0; j < currentPicture.getM() - k; j++) {
-                if (currentPicture.getCellValue(i, j) == Color.BLACK) {
+        for (int i = 0; i <= currentPicture.getN() - k; i++) {
+            for (int j = 0; j <= currentPicture.getM() - k; j++) {
+                //if (currentPicture.getCellValue(i, j) == Color.BLACK) {
                     tempValue = currentPicture.getSubPictureBlackCount(i, j, i + k, j + k);
                     if (tempValue > maxValue) {
                         maxValue = tempValue;
                         maxI = i;
                         maxJ = j;
                     }
-                }
+                //}
             }
         }
         
@@ -83,7 +87,8 @@ public class Algo {
         }
         
         // Si on fait plus de destructions que de paintings, on ne fait rien
-        if (bestPair.getValue() < 0) {
+        //if (bestPair.getValue() < 0) {
+        if(bestPair == null) {
             ret.result = false;
         } else {
             ret.result = true;
@@ -99,7 +104,7 @@ public class Algo {
             int C1 = square.C - square.S;
             int C2 = square.C + square.S + 1;
             
-            System.out.println("(" + R1 + ", " + C1 + ", " + R2 + ", " + C2 + ")");
+            //System.out.println("(" + R1 + ", " + C1 + ", " + R2 + ", " + C2 + ")");
             
             for (int i = R1; i < R2; i++) {
                 for (int j = C1; j < C2; j++) {
@@ -107,7 +112,7 @@ public class Algo {
                         ret.nbPixel += 1;
                     } else {
                         ret.resultPath.destructions.add(new Destruction(i, j));
-                        System.out.println("Je fais une destruction en (" + i + ", " + j + ")");
+                        //System.out.println("Je fais une destruction en (" + i + ", " + j + ")");
                     }
                 }
             }
@@ -157,7 +162,15 @@ public class Algo {
         // Fonction de Mallet permettant la "décoloration"
         System.out.println("Square size : " + minResult.resultPath.squares.size());
         System.out.println("Destruction size : " + minResult.resultPath.destructions.size());
+        
+        MyPredicate filter = new MyPredicate();
+        filter.resultPath = currentPath;
+        
+        // Destruction check
+        minResult.resultPath.destructions.removeIf(filter);
+        
         minResult.resultPath.dePaint(currentPicture);
+        //System.out.println(currentPicture);
         
         // On rajoute l'ancien path
         currentPath.add(minResult.resultPath);
