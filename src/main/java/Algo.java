@@ -50,7 +50,6 @@ public class Algo {
     
     public static StepResult stepSquare(Picture currentPicture) throws Exception {
         StepResult ret = new StepResult();
-        
         // On cherche la dimension la plus petite entre la largeur
         // et la hauteur de l'image
         int minMN = Integer.min(currentPicture.getN(), currentPicture.getM());
