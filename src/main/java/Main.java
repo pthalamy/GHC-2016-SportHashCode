@@ -13,15 +13,15 @@ public class Main {
             System.exit(1);
         }
 
-		String inputFileName = args[0];
-		int extIndex = inputFileName.lastIndexOf(".in");
-			String outputFileName = inputFileName.substring(0, extIndex) + ".out";
+	String inputFileName = args[0];
+	int extIndex = inputFileName.lastIndexOf(".in");
+	String outputFileName = inputFileName.substring(0, extIndex) + ".out";
 
-		File inputFile = new File(inputFileName);
+	File inputFile = new File(inputFileName);
 
-		Picture pic = Parser.parseInput(inputFile);
+	Picture pic = Parser.parseInput(inputFile);
 
-		System.out.println(pic.toString());
+	System.out.println(pic.toString());
 
         Path p = simple(pic);
 
@@ -34,7 +34,7 @@ public class Main {
 	    System.out.println("INVALID OUTPUT");
 	}
 	
-        Writer.write("test.t",p);
+        Writer.write(outputFileName, p);
     }
 
     public static Path simple(Picture pic){
