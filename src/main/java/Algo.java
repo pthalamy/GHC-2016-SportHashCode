@@ -120,6 +120,7 @@ public class Algo {
         VerticalLine vl = currentPicture.getBestVerticalLine();
         
         if (vl != null) {
+            System.out.println("VL found. Size: " + vl.size);
             ret.resultPath.verticalLines.add(vl);
             ret.nbPixel += vl.size;
             ret.result = true;
@@ -132,6 +133,7 @@ public class Algo {
         HorizontalLine hl = currentPicture.getBestHorizontalLine();
         
         if (hl != null) {
+            System.out.println("HL found. Size: " + hl.size);
             ret.resultPath.horizontalLines.add(hl);
             ret.nbPixel += hl.size;
             ret.result = true;
