@@ -24,6 +24,16 @@ public class Main {
 		System.out.println(pic.toString());
 
         Path p = simple(pic);
+
+	Picture repic = p.rePaint(pic.getN(), pic.getM());
+	System.out.println(repic.toString());	
+	
+	if (pic.equals(repic)) {
+	    System.out.println("OUTPUT OK");
+	} else {
+	    System.out.println("INVALID OUTPUT");
+	}
+	
         Writer.write("test.t",p);
     }
 
