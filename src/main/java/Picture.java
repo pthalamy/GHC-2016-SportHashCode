@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 public class Picture {
 
     private int N;
@@ -38,5 +40,15 @@ public class Picture {
 
     public int getBlackCount(){
         return count;
+    }
+
+    @Override
+    public String toString() {
+        return "Picture{" +
+                "N=" + N +
+                ", M=" + M +
+                ", count=" + count +
+                ", cell=" + Arrays.toString(cell) +
+                '}';
     }
 }
