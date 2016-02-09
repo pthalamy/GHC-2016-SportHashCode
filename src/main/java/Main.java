@@ -49,6 +49,9 @@ public class Main {
                     }
                 }
             }
+            if(b){
+                path.horizontalLines.add(new HorizontalLine(i,last,pic.getM()));
+            }
         }
         return path;
     }
