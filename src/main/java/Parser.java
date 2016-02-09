@@ -1,12 +1,18 @@
 
 import java.io.*;
+import java.util.Scanner;
 
 public class Parser {
 
     public static Picture parseInput(File inputFile) {
 
-	Scanner sc = new Scanner(inputFile);
-	
+		Scanner sc = null;
+		try {
+			sc = new Scanner(inputFile);
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+
 	int N = sc.nextInt();
 	int M = sc.nextInt();
 	
@@ -20,9 +26,9 @@ public class Parser {
 		cellChar = sc.next();
 		
 		if (cellChar.equals("#"))
-		    pic.setCell(R, C, 1);		    
+		    pic.setCell(R, C, (byte) 1);
 		else 
-		    pic.setCell(R, C, 0);
+		    pic.setCell(R, C, (byte) 0);
 	    }
 	}
 

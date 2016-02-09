@@ -1,5 +1,3 @@
-
-
 public class Picture {
 
     private int N;
@@ -10,23 +8,23 @@ public class Picture {
 
 
     public Picture(int N, int M) {
-	super();
+        super();
 
-	this.N = N;
-	this.M = M;
+        this.N = N;
+        this.M = M;
 
-	cell = new byte[N][M];
+        cell = new byte[N][M];
     }
 
-    public getN(int N) {
-	return N;
+    public int getN(int N) {
+	    return N;
     }
 
-    public getM(int M) {
+    public int getM() {
 	return M;
     }
 
-    public setCell(int R, int C, byte v) {
+    public void setCell(int R, int C, byte v) {
 	this.cell[R][C] = v;
     }
 
