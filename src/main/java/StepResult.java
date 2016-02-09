@@ -8,7 +8,7 @@
  *
  * @author airone
  */
-class StepResult {
+public class StepResult {
     /**
      * Si une solution a été trouvée ou non à l'étape courante
      */
@@ -23,4 +23,21 @@ class StepResult {
      * Le chemin qui a permis d'arriver à une telle solution
      */
     public Path resultPath;
+    
+    public static StepResult bestStepResult(StepResult a, StepResult b) throws Exception {
+        if (a.result && b.result) {
+            if (a.nbPixel - a.resultPath.nbOperations() >
+                    b.nbPixel - b.resultPath.nbOperations()) {
+                return a;
+            } else {
+                return b;
+            }
+        } else if (a.result) {
+            return b;
+        } else if (b.result) {
+            return a;
+        }
+        
+        throw new Exception("Impossible de trouver le minimum");
+    }
 }

@@ -15,4 +15,10 @@ class Path {
     LinkedList<Square> squares = new LinkedList<Square>();
     LinkedList<HorizontalLine> horizontalLines = new LinkedList<HorizontalLine>();
     LinkedList<VerticalLine> verticalLines = new LinkedList<VerticalLine>();
+    LinkedList<Destruction> destructions = new LinkedList<Destruction>();
+    
+    public int nbOperations() {
+        return squares.size() + horizontalLines.size() + verticalLines.size()
+                + destructions.size();
+    }
 }

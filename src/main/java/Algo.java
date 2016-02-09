@@ -28,9 +28,18 @@ public class Algo {
     }
     
     
-    public StepResult step(Picture currentPicture, Path currentPath) {
-        StepResult ret = new StepResult();
+    public StepResult step(Picture currentPicture, Path currentPath) throws Exception {
+        // D'abord les carrés
+        StepResult minResult = stepSquare(currentPicture, currentPath);
         
-        return ret;
+        // Puis les lignes
+        StepResult auxResult = stepVerticalLine(currentPicture, currentPath);
+        minResult = StepResult.bestStepResult(minResult, auxResult);
+        
+        auxResult = stepHorizontalLine(currentPicture, currentPath);
+        minResult = StepResult.bestStepResult(minResult, auxResult);
+        
+        
+        return minResult;
     }
 }
