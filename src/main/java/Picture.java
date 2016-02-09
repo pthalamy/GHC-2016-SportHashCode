@@ -94,6 +94,33 @@ public class Picture {
         return vl;
     }
 
+    public HorizontalLine getBestHorizontalLine(){
+        HorizontalLine hl = new HorizontalLine(0, 0, 0);
+        
+        for (int j = 0; j < M; j++) {
+            int i = 0;
+            while (i < N) {
+                int size = 0;
+                int c1 = 0;
+                if (this.cell[i][j] == Color.BLACK){
+                    size = 1;
+                    c1 = i;
+                    while (this.cell[i++][j] == Color.BLACK)
+                        size++;
+                }
+                else 
+                    i++;
+                if (size > hl.size) {
+                    hl.size = size;
+                    hl.R = j;
+                    hl.C1 = c1;
+                    hl.C2 = i;
+                }
+            }
+        }
+        return hl;
+    }
+    
     @Override
     public Picture clone(){
         Picture p = new Picture(N,M);

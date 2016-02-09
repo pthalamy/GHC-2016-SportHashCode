@@ -12,11 +12,13 @@ class HorizontalLine {
     public int R;
     public int C1;
     public int C2;
+    public int size;
 
     public HorizontalLine(int r, int c1, int c2) {
         R = r;
         C1 = c1;
         C2 = c2;
+        this.size = c2 - c1;
     }
 
     public HorizontalLine clone(){

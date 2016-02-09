@@ -32,7 +32,10 @@ class Path {
     }
     
     public void add(Path anotherPath) {
-        
+        this.squares.addAll(anotherPath.squares);
+        this.horizontalLines.addAll(horizontalLines);
+        this.verticalLines.addAll(verticalLines);
+        this.destructions.addAll(destructions);
     }
 	
     /** Recreates the original picture of dimension N x M from this instance of path */

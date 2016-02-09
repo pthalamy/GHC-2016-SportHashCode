@@ -49,6 +49,10 @@ public class Algo {
     
     public StepResult stepSquare(Picture currentPicture) throws Exception {
         StepResult ret = new StepResult();
+        HorizontalLine hl = currentPicture.getBestHorizontalLine();
+        
+        ret.resultPath.horizontalLines.add(hl);
+        ret.nbPixel += hl.size;
         
         // On cherche la dimension la plus petite entre la largeur
         // et la hauteur de l'image
@@ -97,6 +101,10 @@ public class Algo {
     
     public StepResult stepVerticalLine(Picture currentPicture) {
         StepResult ret = new StepResult();
+        VerticalLine vl = currentPicture.getBestVerticalLine();
+        
+        ret.resultPath.verticalLines.add(vl);
+        ret.nbPixel += vl.size;
         
         return ret;
     }
