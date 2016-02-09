@@ -18,7 +18,7 @@ public class Picture {
         cell = new Color[N][M];
     }
 
-    public int getN(int N) {
+    public int getN() {
 	    return N;
     }
 
