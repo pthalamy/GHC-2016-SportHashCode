@@ -6,20 +6,19 @@ public class Parser {
 
     public static Picture parseInput(File inputFile) {
 
-		FileReader sc = null;
 		try {
-			sc = new FileReader(inputFile);
-			int N = sc.read();
-			int M = sc.read();
+			Scanner sc = new Scanner(inputFile);
+			int N = sc.nextInt();
+			int M = sc.nextInt();
 
 			Picture pic = new Picture(N, M);
-			int cellChar;
+			String cellChar;
 			for (int R = 0; R < N; R++) {
+                cellChar = sc.next();
 				for (int C = 0; C < M; C++) {
 
-					cellChar = sc.read();
 
-					if (cellChar == '#') {
+					if (cellChar.charAt(C) == '#') {
                         pic.setCell(R, C, Color.BLACK);
                         pic.incCount();
                     }

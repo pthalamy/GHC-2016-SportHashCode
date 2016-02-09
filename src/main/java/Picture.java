@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 public class Picture {
 
     private int N;
@@ -16,7 +18,7 @@ public class Picture {
         cell = new Color[N][M];
     }
 
-    public int getN(int N) {
+    public int getN() {
 	    return N;
     }
 
@@ -38,5 +40,22 @@ public class Picture {
 
     public int getBlackCount(){
         return count;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder s = new StringBuilder("Picture{" +
+                "N=" + N +
+                ", M=" + M +
+                "\n count=" + count +
+                "\n");
+        for(int i = 0; i < N; i++){
+            for(int j = 0; j < M;j++){
+                s.append(getCellValue(i,j));
+            }
+            s.append("\n");
+        }
+        s.append("\n}");
+        return s.toString();
     }
 }
