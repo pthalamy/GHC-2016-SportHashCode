@@ -65,4 +65,19 @@ public class Picture {
         s.append("\n}");
         return s.toString();
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Picture picture = (Picture) o;
+
+        return Arrays.deepEquals(cell, picture.cell);
+    }
+
+    @Override
+    public int hashCode() {
+        return Arrays.deepHashCode(cell);
+    }
 }
