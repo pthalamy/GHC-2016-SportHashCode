@@ -66,6 +66,33 @@ public class Picture {
         }
         return ret;
     }
+    
+    public VerticalLine getBestVerticalLine(){
+        VerticalLine vl = new VerticalLine(0, 0, 0);
+        
+        for (int i = 0; i < N; i++) {
+            int j = 0;
+            while (j < M) {
+                int size = 0;
+                int r1 = 0;
+                if (this.cell[i][j] == Color.BLACK){
+                    size = 1;
+                    r1 = j;
+                    while (this.cell[i][j++] == Color.BLACK)
+                        size++;
+                }
+                else 
+                    j++;
+                if (size > vl.size) {
+                    vl.size = size;
+                    vl.C = i;
+                    vl.R1 = r1;
+                    vl.R2 = j;
+                }
+            }
+        }
+        return vl;
+    }
 
     @Override
     public Picture clone(){
