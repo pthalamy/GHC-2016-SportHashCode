@@ -69,58 +69,60 @@ public class Picture {
         return ret;
     }
     
-    public VerticalLine getBestVerticalLine(){
-        VerticalLine vl = new VerticalLine(0, 0, 0);
+    public HorizontalLine getBestHorizontalLine(){
+        HorizontalLine hl = new HorizontalLine(0, 0, 0);
         
         for (int i = 0; i < N; i++) {
             int j = 0;
             while (j < M) {
                 int size = 0;
-                int r1 = 0;
+                int c1 = 0;
                 if (this.cell[i][j] == Color.BLACK){
-                    size = 1;
-                    r1 = j;
+                    size = 0;
+                    c1 = j;
                     while (this.cell[i][j++] == Color.BLACK && j < M)
                         size++;
                 }
                 else 
                     j++;
-                if (size > vl.size) {
-                    vl.size = size;
-                    vl.C = i;
-                    vl.R1 = r1;
-                    vl.R2 = j;
+                
+                if (size > hl.size) {
+                    hl.size = size;
+                    hl.R = i;
+                    hl.C1 = c1;
+                    hl.C2 = j;
                 }
             }
         }
-        return vl;
+        return hl;
     }
 
-    public HorizontalLine getBestHorizontalLine(){
-        HorizontalLine hl = new HorizontalLine(0, 0, 0);
+    public VerticalLine getBestVerticalLine(){
+        VerticalLine vl = new VerticalLine(0, 0, 0);
         
         for (int j = 0; j < M; j++) {
             int i = 0;
             while (i < N) {
                 int size = 0;
-                int c1 = 0;
+                int r1 = 0;
                 if (this.cell[i][j] == Color.BLACK){
-                    size = 1;
-                    c1 = i;
+                    size = 0;
+                    r1 = i;
                     while (this.cell[i++][j] == Color.BLACK && i < N)
                         size++;
                 }
                 else 
                     i++;
-                if (size > hl.size) {
-                    hl.size = size;
-                    hl.R = j;
-                    hl.C1 = c1;
-                    hl.C2 = i;
+                
+                if (size > vl.size) {
+                    vl.size = size;
+                    vl.C = j;
+                    vl.R1 = r1;
+                    vl.R2 = i;
                 }
             }
         }
-        return hl;
+        return vl;
     }
     
     @Override

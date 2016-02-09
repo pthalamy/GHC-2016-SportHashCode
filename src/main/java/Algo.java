@@ -146,7 +146,10 @@ public class Algo {
     
     public static void step(Picture currentPicture, Path currentPath) throws Exception {
         // D'abord les carrés
-        StepResult minResult = stepSquare(currentPicture);
+//        StepResult minResult = stepSquare(currentPicture);
+//        
+        
+        StepResult minResult = new StepResult();
         
         // Puis les lignes
         StepResult auxResult = stepVerticalLine(currentPicture);
