@@ -120,9 +120,11 @@ public class Algo {
         StepResult ret = new StepResult();
         VerticalLine vl = currentPicture.getBestVerticalLine();
         
-        ret.resultPath.verticalLines.add(vl);
-        ret.nbPixel += vl.size;
-        
+        if (vl != null) {
+            ret.resultPath.verticalLines.add(vl);
+            ret.nbPixel += vl.size;
+            ret.result = true;
+        }   
         return ret;
     }
     
@@ -130,9 +132,11 @@ public class Algo {
         StepResult ret = new StepResult();
         HorizontalLine hl = currentPicture.getBestHorizontalLine();
         
-        ret.resultPath.horizontalLines.add(hl);
-        ret.nbPixel += hl.size;
-        
+        if (hl != null) {
+            ret.resultPath.horizontalLines.add(hl);
+            ret.nbPixel += hl.size;
+            ret.result = true;
+        }
         return ret;
     }
     
