@@ -101,12 +101,13 @@ public class Algo {
             
             System.out.println("(" + R1 + ", " + C1 + ", " + R2 + ", " + C2 + ")");
             
-            for (int i = R1; i <= R2; i++) {
-                for (int j = C1; j <= C2; j++) {
+            for (int i = R1; i < R2; i++) {
+                for (int j = C1; j < C2; j++) {
                     if (currentPicture.getCellValue(i, j) == Color.BLACK) {
                         ret.nbPixel += 1;
                     } else {
                         ret.resultPath.destructions.add(new Destruction(i, j));
+                        System.out.println("Je fais une destruction en (" + i + ", " + j + ")");
                     }
                 }
             }
@@ -155,6 +156,7 @@ public class Algo {
         
         // Fonction de Mallet permettant la "décoloration"
         System.out.println("Square size : " + minResult.resultPath.squares.size());
+        System.out.println("Destruction size : " + minResult.resultPath.destructions.size());
         minResult.resultPath.dePaint(currentPicture);
         
         // On rajoute l'ancien path

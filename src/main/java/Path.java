@@ -33,9 +33,9 @@ class Path {
     
     public void add(Path anotherPath) {
         this.squares.addAll(anotherPath.squares);
-        this.horizontalLines.addAll(horizontalLines);
-        this.verticalLines.addAll(verticalLines);
-        this.destructions.addAll(destructions);
+        this.horizontalLines.addAll(anotherPath.horizontalLines);
+        this.verticalLines.addAll(anotherPath.verticalLines);
+        this.destructions.addAll(anotherPath.destructions);
     }
 	
     /** Recreates the original picture of dimension N x M from this instance of path */
