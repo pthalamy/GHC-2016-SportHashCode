@@ -22,4 +22,10 @@ class VerticalLine {
     public VerticalLine clone(){
         return new VerticalLine(R1,R2,C);
     }
+    
+    public void paint(Picture pic) {
+	for (int i = R1; i <= R2; i++) {
+	    pic.setCell(i, C, Color.BLACK);
+	}
+    }
 }

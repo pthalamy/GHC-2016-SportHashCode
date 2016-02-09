@@ -20,4 +20,8 @@ class Destruction {
     public Destruction clone(){
         return new Destruction(R,C);
     }
+
+    public void paint(Picture pic) {
+	pic.setCell(R, C, Color.BLANK);
+    }
 }

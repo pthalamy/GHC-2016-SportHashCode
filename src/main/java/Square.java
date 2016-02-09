@@ -23,4 +23,12 @@ class Square {
     public Square clone(){
         return new Square(R,C,S);
     }
+	
+    public void paint(Picture pic) {
+	for (int i = R - S; i < R + S; i++) {
+	    for (int j = C - S; j < C + S; j++) {
+		pic.setCell(i, j, Color.BLACK);
+	    }
+	}
+    }
 }
