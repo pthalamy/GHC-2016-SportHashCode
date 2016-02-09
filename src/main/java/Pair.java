@@ -53,4 +53,12 @@ public class Pair<F, S> {
     public static <A, B> Pair  create(A a, B b) {
         return new Pair<A, B>(a, b);
     }
+
+    public S getValue() {
+        return second;
+    }
+    
+    public F getKey() {
+        return first;
+    }
 }
