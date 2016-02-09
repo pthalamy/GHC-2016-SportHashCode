@@ -20,7 +20,7 @@ public class Algo {
      * @return Retourne un couple formé du carré trouvé ainsi que de nbPixels - nbPixelsVide
      * @throws Exception 
      */
-    public Pair<Square, Integer> findBestSquare(Picture currentPicture, int k) throws Exception {
+    public static Pair<Square, Integer> findBestSquare(Picture currentPicture, int k) throws Exception {
         int maxI = 0;
         int maxJ = 0;
         int maxValue = 0;
@@ -47,7 +47,7 @@ public class Algo {
         return new Pair<>(new Square(maxI + s, maxJ + s, k), maxValue - s);
     }
     
-    public StepResult stepSquare(Picture currentPicture) throws Exception {
+    public static StepResult stepSquare(Picture currentPicture) throws Exception {
         StepResult ret = new StepResult();
         HorizontalLine hl = currentPicture.getBestHorizontalLine();
         
@@ -99,7 +99,7 @@ public class Algo {
         return ret;
     }
     
-    public StepResult stepVerticalLine(Picture currentPicture) {
+    public static StepResult stepVerticalLine(Picture currentPicture) {
         StepResult ret = new StepResult();
         VerticalLine vl = currentPicture.getBestVerticalLine();
         
@@ -109,14 +109,14 @@ public class Algo {
         return ret;
     }
     
-    public StepResult stepHorizontalLine(Picture currentPicture) {
+    public static StepResult stepHorizontalLine(Picture currentPicture) {
         StepResult ret = new StepResult();
         
         return ret;
     }
     
     
-    public StepResult step(Picture currentPicture, Path currentPath) throws Exception {
+    public static StepResult step(Picture currentPicture, Path currentPath) throws Exception {
         // D'abord les carrés
         StepResult minResult = stepSquare(currentPicture);
         
@@ -130,8 +130,7 @@ public class Algo {
         // Fonction de Mallet permettant la "décoloration"
         minResult.resultPath.dePaint(currentPicture);
         
-        // On check si la décoloration donne une picture vide ou non
-        
+        // On rajoute l'ancien path
         minResult.resultPath.add(currentPath);
         
         return minResult;

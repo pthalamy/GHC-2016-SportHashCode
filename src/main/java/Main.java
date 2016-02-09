@@ -36,6 +36,17 @@ public class Main {
 	
         Writer.write(outputFileName, p);
     }
+    
+    public static Path complex(Picture pic) throws Exception {
+        Path ret = new Path();
+        StepResult res;
+        
+        while ((res = Algo.step(pic, ret)).nbPixel > 0) {
+            System.out.println("nbPixels : " + res.nbPixel);
+        }
+        
+        return ret;
+    }
 
     public static Path simple(Picture pic){
         Path path = new Path();
