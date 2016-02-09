@@ -13,13 +13,22 @@ class VerticalLine {
     public int R2;
     public int C;
 
+    public int size;
+    
     public VerticalLine(int r1, int r2, int c) {
         R1 = r1;
         R2 = r2;
         C = c;
+        this.size = r2 - r1;
     }
 
     public VerticalLine clone(){
         return new VerticalLine(R1,R2,C);
+    }
+    
+    public void paint(Picture pic) {
+	for (int i = R1; i <= R2; i++) {
+	    pic.setCell(i, C, Color.BLACK);
+	}
     }
 }

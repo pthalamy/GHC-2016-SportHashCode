@@ -13,17 +13,28 @@ public class Main {
             System.exit(1);
         }
 
-		String inputFileName = args[0];
-		int extIndex = inputFileName.lastIndexOf(".in");
-			String outputFileName = inputFileName.substring(0, extIndex) + ".out";
+	String inputFileName = args[0];
+	int extIndex = inputFileName.lastIndexOf(".in");
+	String outputFileName = inputFileName.substring(0, extIndex) + ".out";
 
-		File inputFile = new File(inputFileName);
+	File inputFile = new File(inputFileName);
 
-		Picture pic = Parser.parseInput(inputFile);
+	Picture pic = Parser.parseInput(inputFile);
 
-		System.out.println(pic.toString());
+	System.out.println(pic.toString());
 
+        Path p = simple(pic);
 
+	Picture repic = p.rePaint(pic.getN(), pic.getM());
+	System.out.println(repic.toString());	
+	
+	if (pic.equals(repic)) {
+	    System.out.println("OUTPUT OK");
+	} else {
+	    System.out.println("INVALID OUTPUT");
+	}
+	
+        Writer.write(outputFileName, p);
     }
 
     public static Path simple(Picture pic){
@@ -47,6 +58,9 @@ public class Main {
                         b = false;
                     }
                 }
+            }
+            if(b){
+                path.horizontalLines.add(new HorizontalLine(i,last,pic.getM()-1));
             }
         }
         return path;

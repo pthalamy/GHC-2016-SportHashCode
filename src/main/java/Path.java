@@ -30,4 +30,27 @@ class Path {
         this.destructions.forEach(f -> p.destructions.add(f.clone()));
         return p;
     }
+	
+    /** Recreates the original picture of dimension N x M from this instance of path */
+    public Picture rePaint(int N, int M) {
+	Picture repic = new Picture(N, M);
+
+	for (Square sq : this.squares) {
+	    sq.paint(repic);
+	}
+
+	for (HorizontalLine hl : this.horizontalLines) {
+	    hl.paint(repic);
+	}
+
+	for (VerticalLine vl : this.verticalLines) {
+	    vl.paint(repic);
+	}
+
+	for (Destruction d : this.destructions) {
+	    d.paint(repic);
+	}
+
+	return repic;
+    }
 }

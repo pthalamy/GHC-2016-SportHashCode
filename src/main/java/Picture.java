@@ -16,6 +16,11 @@ public class Picture {
         this.M = M;
 
         cell = new Color[N][M];
+        for (int i = 0; i < cell.length; i++) {
+            for (int i1 = 0; i1 < cell[i].length; i1++) {
+                cell[i][i1] = Color.BLANK;
+            }
+        }
     }
 
     public int getN() {
@@ -61,6 +66,33 @@ public class Picture {
         }
         return ret;
     }
+    
+    public VerticalLine getBestVerticalLine(){
+        VerticalLine vl = new VerticalLine(0, 0, 0);
+        
+        for (int i = 0; i < N; i++) {
+            int j = 0;
+            while (j < M) {
+                int size = 0;
+                int r1 = 0;
+                if (this.cell[i][j] == Color.BLACK){
+                    size = 1;
+                    r1 = j;
+                    while (this.cell[i][j++] == Color.BLACK)
+                        size++;
+                }
+                else 
+                    j++;
+                if (size > vl.size) {
+                    vl.size = size;
+                    vl.C = i;
+                    vl.R1 = r1;
+                    vl.R2 = j;
+                }
+            }
+        }
+        return vl;
+    }
 
     @Override
     public Picture clone(){
@@ -84,5 +116,20 @@ public class Picture {
         }
         s.append("\n}");
         return s.toString();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Picture picture = (Picture) o;
+
+        return Arrays.deepEquals(cell, picture.cell);
+    }
+
+    @Override
+    public int hashCode() {
+        return Arrays.deepHashCode(cell);
     }
 }

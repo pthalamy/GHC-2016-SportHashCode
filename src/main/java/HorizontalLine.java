@@ -22,4 +22,10 @@ class HorizontalLine {
     public HorizontalLine clone(){
         return new HorizontalLine(R,C1,C2);
     }
+
+    public void paint(Picture pic) {
+	for (int j = C1; j <= C2; j++) {
+	    pic.setCell(R, j, Color.BLACK);
+	}
+    }
 }
