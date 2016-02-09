@@ -23,7 +23,8 @@ public class Main {
 
 		System.out.println(pic.toString());
 
-
+        Path p = simple(pic);
+        Writer.write("test.t",p);
     }
 
     public static Path simple(Picture pic){
