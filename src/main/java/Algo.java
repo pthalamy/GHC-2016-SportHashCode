@@ -1,6 +1,4 @@
 
-import java.util.Map.Entry;
-import javafx.util.Pair;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -49,10 +47,6 @@ public class Algo {
     
     public static StepResult stepSquare(Picture currentPicture) throws Exception {
         StepResult ret = new StepResult();
-        HorizontalLine hl = currentPicture.getBestHorizontalLine();
-        
-        ret.resultPath.horizontalLines.add(hl);
-        ret.nbPixel += hl.size;
         
         // On cherche la dimension la plus petite entre la largeur
         // et la hauteur de l'image
@@ -111,6 +105,10 @@ public class Algo {
     
     public static StepResult stepHorizontalLine(Picture currentPicture) {
         StepResult ret = new StepResult();
+        HorizontalLine hl = currentPicture.getBestHorizontalLine();
+        
+        ret.resultPath.horizontalLines.add(hl);
+        ret.nbPixel += hl.size;
         
         return ret;
     }

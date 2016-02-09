@@ -10,11 +10,13 @@ public enum Color {
     }
 
 
-    public static Color depaint(Color cellValue,boolean destroy) {
+    public static Color depaint(Picture pic, Color cellValue,boolean destroy) {
         switch (cellValue){
             case BLANK:
                 return CHANGED;
             case BLACK:
+                pic.decCount();
+                
                 return BLANK;
             case CHANGED:
                 if(destroy)
