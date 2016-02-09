@@ -5,7 +5,7 @@ import java.io.*;
  */
 public class Main {
 
-    public static void main(String[] args){
+    public static void main(String[] args) throws Exception{
 
         if (args.length < 1) {
             System.err.println("error: missing parameter: input file");
@@ -23,7 +23,7 @@ public class Main {
 
 	System.out.println(pic.toString());
 
-        Path p = simple(pic);
+        Path p = complex(pic);
 
 	Picture repic = p.rePaint(pic.getN(), pic.getM());
 	System.out.println(repic.toString());	
@@ -39,10 +39,13 @@ public class Main {
     
     public static Path complex(Picture pic) throws Exception {
         Path ret = new Path();
-        StepResult res;
+
+        Algo.step(pic, ret);
+        System.out.println("nbPixels : " + pic.getBlackCount());
         
-        while ((res = Algo.step(pic, ret)).nbPixel > 0) {
-            System.out.println("nbPixels : " + res.nbPixel);
+        while (pic.getBlackCount() > 0) {
+            System.out.println("nbPixels : " + pic.getBlackCount());
+            Algo.step(pic, ret);
         }
         
         return ret;

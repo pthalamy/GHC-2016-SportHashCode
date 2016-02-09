@@ -114,7 +114,7 @@ public class Algo {
     }
     
     
-    public static StepResult step(Picture currentPicture, Path currentPath) throws Exception {
+    public static void step(Picture currentPicture, Path currentPath) throws Exception {
         // D'abord les carrés
         StepResult minResult = stepSquare(currentPicture);
         
@@ -129,8 +129,6 @@ public class Algo {
         minResult.resultPath.dePaint(currentPicture);
         
         // On rajoute l'ancien path
-        minResult.resultPath.add(currentPath);
-        
-        return minResult;
+        currentPath.add(minResult.resultPath);
     }
 }
