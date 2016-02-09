@@ -120,6 +120,7 @@ public class Algo {
         minResult = StepResult.bestStepResult(minResult, auxResult);
         
         // Fonction de Mallet permettant la "décoloration"
+        minResult.resultPath.dePaint(currentPicture);
         
         // On check si la décoloration donne une picture vide ou non
         

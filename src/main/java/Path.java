@@ -59,9 +59,7 @@ class Path {
     }
 
     /** Recreates the original picture of dimension N x M from this instance of path */
-    public Picture dePaint(int N, int M) {
-        Picture repic = new Picture(N, M);
-
+    public Picture dePaint(Picture repic) {
         for (Square sq : this.squares) {
             sq.depaint(repic);
         }
