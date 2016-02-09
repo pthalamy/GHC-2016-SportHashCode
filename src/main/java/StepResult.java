@@ -27,16 +27,20 @@ public class StepResult {
     
     public static StepResult bestStepResult(StepResult a, StepResult b) throws Exception {
         if (a.result && b.result) {
-            if (a.nbPixel - a.resultPath.nbOperations() >
-                    b.nbPixel - b.resultPath.nbOperations()) {
+            System.out.println("Solutions");
+            if (a.nbPixel > b.nbPixel) {
+                System.out.println("A Solution");
                 return a;
             } else {
+                System.out.println("B Solution");
                 return b;
             }
         } else if (a.result) {
-            return b;
-        } else if (b.result) {
+            System.out.println("A Solution");
             return a;
+        } else if (b.result) {
+            System.out.println("B Solution");
+            return b;
         }
         
         throw new Exception("Impossible de trouver le minimum");
