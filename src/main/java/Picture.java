@@ -3,11 +3,9 @@ import java.util.Arrays;
 public class Picture {
 
     private int N;
-    private int M,count = 0;
+    private int M,count = 0;    
     
-
     private Color cell[][] ;
-
 
     public Picture(int N, int M) {
         super();
@@ -43,10 +41,14 @@ public class Picture {
         count++;
     }
 
+	public void decCount() {
+		count--;
+	}
+	
     public int getBlackCount(){
         return count;
     }
-    
+
     /**
      * Compte le nombre de pixels à colorier dans le sous-rectangle défini
      * @param R1 Ligne haute gauche
@@ -133,7 +135,7 @@ public class Picture {
         StringBuilder s = new StringBuilder("Picture{" +
                 "N=" + N +
                 ", M=" + M +
-                "\n count=" + count +
+                "\n blackCount=" + count +
                 "\n");
         for(int i = 0; i < N; i++){
             for(int j = 0; j < M;j++){

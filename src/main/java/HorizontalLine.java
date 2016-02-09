@@ -34,7 +34,7 @@ class HorizontalLine {
 
     public void depaint(Picture pic) {
         for (int j = C1; j <= C2; j++) {
-            pic.setCell(R, j, Color.depaint(pic.getCellValue(R,j),false));
+            pic.setCell(R, j, Color.depaint(pic, pic.getCellValue(R,j),false));
         }
     }
 }

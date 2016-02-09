@@ -34,7 +34,7 @@ class VerticalLine {
 
     public void depaint(Picture pic) {
         for (int i = R1; i <= R2; i++) {
-            pic.setCell(i, C, Color.depaint(pic.getCellValue(i,C),false));
+            pic.setCell(i, C, Color.depaint(pic, pic.getCellValue(i,C),false));
         }
     }
 }
