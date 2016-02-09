@@ -18,4 +18,8 @@ class VerticalLine {
         R2 = r2;
         C = c;
     }
+
+    public VerticalLine clone(){
+        return new VerticalLine(R1,R2,C);
+    }
 }

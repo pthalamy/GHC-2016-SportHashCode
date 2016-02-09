@@ -18,4 +18,9 @@ class Square {
         C = c;
         S = s;
     }
+
+    @Override
+    public Square clone(){
+        return new Square(R,C,S);
+    }
 }

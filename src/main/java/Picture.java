@@ -43,6 +43,13 @@ public class Picture {
     }
 
     @Override
+    public Picture clone(){
+        Picture p = new Picture(N,M);
+        p.cell = this.cell.clone();
+        return p;
+    }
+
+    @Override
     public String toString() {
         StringBuilder s = new StringBuilder("Picture{" +
                 "N=" + N +

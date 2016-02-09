@@ -11,4 +11,13 @@
 class Destruction {
     public int R;
     public int C;
+
+    public Destruction(int r, int c) {
+        R = r;
+        C = c;
+    }
+
+    public Destruction clone(){
+        return new Destruction(R,C);
+    }
 }
