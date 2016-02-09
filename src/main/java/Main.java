@@ -44,10 +44,11 @@ public class Main {
         System.out.println("nbPixels : " + pic.getBlackCount());
         
         //while (pic.getBlackCount() > 0) {
-        for (int count = 0; count != 0 && pic.getBlackCount() > 0; count--) {
+        for (int count = 0; count < 200 && pic.getBlackCount() > 0; count++) {
             System.out.println("nbPixels : " + pic.getBlackCount());
             Algo.step(pic, ret);
         }
+        //}
         
         return ret;
     }

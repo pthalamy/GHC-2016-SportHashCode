@@ -73,25 +73,33 @@ public class Picture {
         HorizontalLine hl = new HorizontalLine(0, 0, 0);
         
         for (int i = 0; i < N; i++) {
-            int j = 0;
-            while (j < M) {
-                int size = 0;
-                int c1 = 0;
-                if (this.cell[i][j] == Color.BLACK){
+            boolean black = false;
+            int start = 0,size = 0;
+            for(int j = 0;j < M;j++) {
+                if (black && this.cell[i][j] == Color.BLACK){
+                    size++;
+                }
+                if(black && this.cell[i][j] == Color.BLANK) {
+                    if (size > hl.size) {
+                        hl.size = size;
+                        hl.R = i;
+                        hl.C1 = start;
+                        hl.C2 = j - 1;
+                    }
+                    black = false;
                     size = 0;
-                    c1 = j;
-                    while (this.cell[i][j++] == Color.BLACK && j < M)
-                        size++;
                 }
-                else 
-                    j++;
-                
-                if (size > hl.size) {
-                    hl.size = size;
-                    hl.R = i;
-                    hl.C1 = c1;
-                    hl.C2 = j;
+                if (!black && this.cell[i][j] == Color.BLACK) {
+                    start = j;
+                    black = true;
+                    size = 1;
                 }
+            }
+            if (size > hl.size) {
+                hl.size = size;
+                hl.R = i;
+                hl.C1 = start;
+                hl.C2 = M - 1;
             }
         }
         return hl;
@@ -101,25 +109,33 @@ public class Picture {
         VerticalLine vl = new VerticalLine(0, 0, 0);
         
         for (int j = 0; j < M; j++) {
-            int i = 0;
-            while (i < N) {
-                int size = 0;
-                int r1 = 0;
-                if (this.cell[i][j] == Color.BLACK){
+            boolean black = false;
+            int start = 0,size = 0;
+            for(int i = 0;i < N;i++) {
+                if (black && this.cell[i][j] == Color.BLACK){
+                    size++;
+                }
+                if(black && this.cell[i][j] == Color.BLANK) {
+                    if (size > vl.size) {
+                        vl.size = size;
+                        vl.C = j;
+                        vl.R1 = start;
+                        vl.R2 = i - 1;
+                    }
+                    black = false;
                     size = 0;
-                    r1 = i;
-                    while (this.cell[i++][j] == Color.BLACK && i < N)
-                        size++;
                 }
-                else 
-                    i++;
-                
-                if (size > vl.size) {
-                    vl.size = size;
-                    vl.C = j;
-                    vl.R1 = r1;
-                    vl.R2 = i;
+                if (!black && this.cell[i][j] == Color.BLACK) {
+                    start = i;
+                    black = true;
+                    size = 1;
                 }
+            }
+            if (size > vl.size) {
+                vl.size = size;
+                vl.C = j;
+                vl.R1 = start;
+                vl.R2 = N - 1;
             }
         }
         return vl;
