@@ -50,6 +50,7 @@ public class Algo {
     
     public static StepResult stepSquare(Picture currentPicture) throws Exception {
         StepResult ret = new StepResult();
+
         // On cherche la dimension la plus petite entre la largeur
         // et la hauteur de l'image
         int minMN = Integer.min(currentPicture.getN(), currentPicture.getM());
@@ -148,15 +149,17 @@ public class Algo {
         StepResult minResult = stepSquare(currentPicture);
         
         // Puis les lignes
-        /*StepResult auxResult = stepVerticalLine(currentPicture);
+        StepResult auxResult = stepVerticalLine(currentPicture);
         minResult = StepResult.bestStepResult(minResult, auxResult);
         
         auxResult = stepHorizontalLine(currentPicture);
-        minResult = StepResult.bestStepResult(minResult, auxResult);*/
+        minResult = StepResult.bestStepResult(minResult, auxResult);
         
         // Fonction de Mallet permettant la "décoloration"
         System.out.println("Square size : " + minResult.resultPath.squares.size());
         System.out.println("Destruction size : " + minResult.resultPath.destructions.size());
+        System.out.println("VL size : " + minResult.resultPath.verticalLines.size());
+        System.out.println("HL size : " + minResult.resultPath.horizontalLines.size());
         minResult.resultPath.dePaint(currentPicture);
         
         // On rajoute l'ancien path
