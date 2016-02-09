@@ -80,7 +80,7 @@ public class Picture {
                 if (this.cell[i][j] == Color.BLACK){
                     size = 1;
                     r1 = j;
-                    while (this.cell[i][j++] == Color.BLACK)
+                    while (this.cell[i][j++] == Color.BLACK && j < M)
                         size++;
                 }
                 else 
@@ -107,7 +107,7 @@ public class Picture {
                 if (this.cell[i][j] == Color.BLACK){
                     size = 1;
                     c1 = i;
-                    while (this.cell[i++][j] == Color.BLACK)
+                    while (this.cell[i++][j] == Color.BLACK && i < N)
                         size++;
                 }
                 else 
