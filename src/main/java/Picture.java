@@ -44,11 +44,18 @@ public class Picture {
 
     @Override
     public String toString() {
-        return "Picture{" +
+        StringBuilder s = new StringBuilder("Picture{" +
                 "N=" + N +
                 ", M=" + M +
-                ", count=" + count +
-                ", cell=" + Arrays.toString(cell) +
-                '}';
+                "\n count=" + count +
+                "\n");
+        for(int i = 0; i < N; i++){
+            for(int j = 0; j < M;j++){
+                s.append(getCellValue(i,j));
+            }
+            s.append("\n");
+        }
+        s.append("\n}");
+        return s.toString();
     }
 }

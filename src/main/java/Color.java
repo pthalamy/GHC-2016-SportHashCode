@@ -3,5 +3,11 @@
  */
 public enum Color {
 
-    BLANK,BLACK,CHANGED
+    BLANK,BLACK,CHANGED;
+
+    public String toString(){
+        return Integer.toString(this.ordinal());
+    }
+
+
 }
