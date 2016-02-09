@@ -33,24 +33,47 @@ class Path {
 	
     /** Recreates the original picture of dimension N x M from this instance of path */
     public Picture rePaint(int N, int M) {
-	Picture repic = new Picture(N, M);
+        Picture repic = new Picture(N, M);
 
-	for (Square sq : this.squares) {
-	    sq.paint(repic);
-	}
+        for (Square sq : this.squares) {
+            sq.paint(repic);
+        }
 
-	for (HorizontalLine hl : this.horizontalLines) {
-	    hl.paint(repic);
-	}
+        for (HorizontalLine hl : this.horizontalLines) {
+            hl.paint(repic);
+        }
 
-	for (VerticalLine vl : this.verticalLines) {
-	    vl.paint(repic);
-	}
+        for (VerticalLine vl : this.verticalLines) {
+            vl.paint(repic);
+        }
 
-	for (Destruction d : this.destructions) {
-	    d.paint(repic);
-	}
+        for (Destruction d : this.destructions) {
+            d.paint(repic);
+        }
 
-	return repic;
+        return repic;
+    }
+
+    /** Recreates the original picture of dimension N x M from this instance of path */
+    public Picture dePaint(int N, int M) {
+        Picture repic = new Picture(N, M);
+
+        for (Square sq : this.squares) {
+            sq.depaint(repic);
+        }
+
+        for (HorizontalLine hl : this.horizontalLines) {
+            hl.depaint(repic);
+        }
+
+        for (VerticalLine vl : this.verticalLines) {
+            vl.depaint(repic);
+        }
+
+        for (Destruction d : this.destructions) {
+            d.depaint(repic);
+        }
+
+        return repic;
     }
 }

@@ -28,4 +28,11 @@ class HorizontalLine {
 	    pic.setCell(R, j, Color.BLACK);
 	}
     }
+
+
+    public void depaint(Picture pic) {
+        for (int j = C1; j <= C2; j++) {
+            pic.setCell(R, j, Color.depaint(pic.getCellValue(R,j),false));
+        }
+    }
 }

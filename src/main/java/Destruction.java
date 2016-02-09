@@ -24,4 +24,9 @@ class Destruction {
     public void paint(Picture pic) {
 	pic.setCell(R, C, Color.BLANK);
     }
+
+    public void depaint(Picture pic) {
+        pic.setCell(R, C, pic.getCellValue(R,C));
+    }
+
 }

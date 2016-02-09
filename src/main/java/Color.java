@@ -10,4 +10,17 @@ public enum Color {
     }
 
 
+    public static Color depaint(Color cellValue,boolean destroy) {
+        switch (cellValue){
+            case BLANK:
+                return CHANGED;
+            case BLACK:
+                return BLANK;
+            case CHANGED:
+                if(destroy)
+                    throw new Error("Can't destroy a changed cell");
+                return CHANGED;
+        }
+        return CHANGED;
+    }
 }

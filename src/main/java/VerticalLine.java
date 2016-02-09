@@ -24,8 +24,14 @@ class VerticalLine {
     }
     
     public void paint(Picture pic) {
-	for (int i = R1; i <= R2; i++) {
-	    pic.setCell(i, C, Color.BLACK);
-	}
+        for (int i = R1; i <= R2; i++) {
+            pic.setCell(i, C, Color.BLACK);
+        }
+    }
+
+    public void depaint(Picture pic) {
+        for (int i = R1; i <= R2; i++) {
+            pic.setCell(i, C, Color.depaint(pic.getCellValue(i,C),false));
+        }
     }
 }

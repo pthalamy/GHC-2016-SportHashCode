@@ -25,10 +25,18 @@ class Square {
     }
 	
     public void paint(Picture pic) {
-	for (int i = R - S; i < R + S; i++) {
-	    for (int j = C - S; j < C + S; j++) {
-		pic.setCell(i, j, Color.BLACK);
-	    }
-	}
+        for (int i = R - S; i < R + S; i++) {
+            for (int j = C - S; j < C + S; j++) {
+            pic.setCell(i, j, Color.BLACK);
+            }
+        }
+    }
+
+    public void depaint(Picture pic) {
+        for (int i = R - S; i < R + S; i++) {
+            for (int j = C - S; j < C + S; j++) {
+                pic.setCell(i, j, Color.depaint(pic.getCellValue(i,j),false));
+            }
+        }
     }
 }
