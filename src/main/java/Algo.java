@@ -24,7 +24,7 @@ public class Algo {
         int maxValue = 0;
         int tempValue;
         for (int i = 0; i < currentPicture.getN() - k; i++) {
-            for (int j = 0; j < currentPicture.getN() - k; j++) {
+            for (int j = 0; j < currentPicture.getM() - k; j++) {
                 if (currentPicture.getCellValue(i, j) == Color.BLACK) {
                     tempValue = currentPicture.getSubPictureBlackCount(i, j, i + k, j + k);
                     if (tempValue > maxValue) {
@@ -40,9 +40,12 @@ public class Algo {
             throw new Exception("Pas de carré possible");
         }
         
-        int s = (k - 1 / 2);
+        int s = (k - 1) / 2;
         
-        return new Pair<>(new Square(maxI + s, maxJ + s, k), maxValue - s);
+        System.out.println("k = " + k + ", s = " + s + ", " + (maxI) + ", " + (maxJ));
+        
+        // TODO : revoir ça !
+        return new Pair<>(new Square(maxI + s, maxJ + s, s), maxValue - (k*k - maxValue));
     }
     
     public static StepResult stepSquare(Picture currentPicture) throws Exception {
@@ -53,12 +56,30 @@ public class Algo {
         int minMN = Integer.min(currentPicture.getN(), currentPicture.getM());
         
         // On cherche le meilleur carré pour tous les k possibles
-        Pair<Square, Integer> bestPair = findBestSquare(currentPicture, 3);
+        Pair<Square, Integer> bestPair = null;
+        try {
+            bestPair = findBestSquare(currentPicture, 3);
+        } catch (Exception e) {
+            bestPair = null;
+        }
+        
         Pair<Square, Integer> tempPair;
         for (int p = 2; 2 * p + 1 < minMN; p++) {
-            tempPair = findBestSquare(currentPicture, 2 * p + 1);
-            if (tempPair.getValue() > bestPair.getValue()) {
-                bestPair = tempPair;
+            try {
+                tempPair = findBestSquare(currentPicture, 2 * p + 1);
+                
+                if (bestPair == null || tempPair.getValue() > bestPair.getValue()) {
+                    bestPair = tempPair;
+                    
+                    Square square = bestPair.getKey();
+                    int R1 = square.R - square.S;
+                    int R2 = square.R + square.S + 1;
+                    int C1 = square.C - square.S;
+                    int C2 = square.C + square.S + 1;
+            
+                    System.out.println("BestPair : " + bestPair.getValue() + "(" + R1 + ", " + C1 + ", " + R2 + ", " + C2 + ")");
+                }
+            } catch (Exception e) {
             }
         }
         
@@ -79,8 +100,10 @@ public class Algo {
             int C1 = square.C - square.S;
             int C2 = square.C + square.S + 1;
             
-            for (int i = R1; i < R2; i++) {
-                for (int j = C1; j < C2; j++) {
+            System.out.println("(" + R1 + ", " + C1 + ", " + R2 + ", " + C2 + ")");
+            
+            for (int i = R1; i <= R2; i++) {
+                for (int j = C1; j <= C2; j++) {
                     if (currentPicture.getCellValue(i, j) == Color.BLACK) {
                         ret.nbPixel += 1;
                     } else {
@@ -119,13 +142,14 @@ public class Algo {
         StepResult minResult = stepSquare(currentPicture);
         
         // Puis les lignes
-        StepResult auxResult = stepVerticalLine(currentPicture);
+        /*StepResult auxResult = stepVerticalLine(currentPicture);
         minResult = StepResult.bestStepResult(minResult, auxResult);
         
         auxResult = stepHorizontalLine(currentPicture);
-        minResult = StepResult.bestStepResult(minResult, auxResult);
+        minResult = StepResult.bestStepResult(minResult, auxResult);*/
         
         // Fonction de Mallet permettant la "décoloration"
+        System.out.println("Square size : " + minResult.resultPath.squares.size());
         minResult.resultPath.dePaint(currentPicture);
         
         // On rajoute l'ancien path

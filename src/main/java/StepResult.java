@@ -9,6 +9,7 @@
  * @author airone
  */
 public class StepResult {
+    
     /**
      * Si une solution a été trouvée ou non à l'étape courante
      */
@@ -22,7 +23,7 @@ public class StepResult {
     /**
      * Le chemin qui a permis d'arriver à une telle solution
      */
-    public Path resultPath;
+    public Path resultPath = new Path();
     
     public static StepResult bestStepResult(StepResult a, StepResult b) throws Exception {
         if (a.result && b.result) {
