@@ -16,7 +16,6 @@ public enum Color {
                 return CHANGED;
             case BLACK:
                 pic.decCount();
-                
                 return BLANK;
             case CHANGED:
                 if(destroy)
@@ -24,5 +23,23 @@ public enum Color {
                 return CHANGED;
         }
         return CHANGED;
+    }
+
+
+    public static void main(String[] args){
+
+        Picture p = new Picture(10,10);
+        /*for(int i = 2; i < 5; i ++){
+            for(int j = 2; j < 5;j++){
+                p.setCell(i,j,Color.BLACK);
+                p.incCount();
+            }
+        }*/
+        System.out.println(p);
+        Path d = new Path();
+        d.squares.add(new Square(4,4,3));
+        System.out.println(d.rePaint(10,10));
+
+
     }
 }
