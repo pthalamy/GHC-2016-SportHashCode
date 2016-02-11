@@ -42,10 +42,6 @@ public class Drone {
             case DELIVERING:
                 delivering(data);
                 break;
-               
-            case GOINGBACK:
-                goingback(data);
-                break;
                 
             case LOADING:
                 loading(data);
@@ -77,6 +73,9 @@ public class Drone {
 
                 this.nbTurn = timeToDest(targetedWarehouse.x, targetedWarehouse.y);
                 
+                this.state = State.LOADING;
+                
+                
                 log("Charge depuis " + targetedWarehouse + " 1 " + po.product + " dans " + this.nbTurn);
             } else {
                 log("Plus de commande à satisfaire");
@@ -88,34 +87,35 @@ public class Drone {
         // throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
 	if (this.nbTurn > 0) 	// Still going to the dest
 	    nbTurn--;
-	else if (this.nbTurn == 0) { // Arrived at the destination
-
-	    this.x = targetedWarehouse.x;
-	    this.y = targetedWarehouse.y;
-	    Command cmd = new DeliverCommand(this,
-					     this.currentLoad.getFirst(), 1,
-					     this.orders.getFirst());
-	    cmd.write(data);
-        this.currentLoad.clear();
-        ProductsOrder pd = this.orders.getFirst().productsOrder.get(0);
-        if(pd.nb == 1){
-            this.orders.getFirst().productsOrder.remove(pd);
-        } else {
-            pd.nb--;
-        }
-        this.state = State.LOADING;
-	} else 			// ERROR
+	else if (this.nbTurn == 0) {
+            // Arrived at the destination and delivered
+            this.currentLoad.clear();
+            
+            Order currentOrder = this.orders.pop();
+            
+            this.x = currentOrder.x;
+	    this.y = currentOrder.y;
+            
+            log("Commande " + currentOrder + " servie");
+            
+            this.state = State.INIT;
+            init(data);
+	} else
        	    log("ERROR: nbTurn < 0");
-    }
-
-    private void goingback(Data data) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     private void loading(Data data) {
         this.nbTurn--;
         if (this.nbTurn == 0) {
             log("Chargé");
+            
+            this.x = targetedWarehouse.x;
+	    this.y = targetedWarehouse.y;
+	    Command cmd = new DeliverCommand(this,
+					     this.currentLoad.getFirst(), 1,
+					     this.orders.getFirst());
+	    cmd.write(data);
+            this.currentLoad.clear();
             
             this.state = State.DELIVERING;
             this.targetedWarehouse = null;
