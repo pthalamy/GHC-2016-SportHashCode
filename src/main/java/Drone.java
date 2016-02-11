@@ -1,4 +1,3 @@
-import com.sun.security.ntlm.Client;
 import java.util.LinkedList;
 import java.util.List;
 import java.lang.Math;
@@ -11,7 +10,7 @@ public class Drone {
     int nbTurn = 0;
     public LinkedList<Product> currentLoad = new LinkedList<>();
     public LinkedList<Order> orders = new LinkedList<>();
-    public State state;
+    public State state = State.INIT;
     public Warehouse targetedWarehouse;
 
     public int timeToDest(int xDest, int yDest) {

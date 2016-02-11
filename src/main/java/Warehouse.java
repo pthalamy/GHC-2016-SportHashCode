@@ -26,12 +26,12 @@ public class Warehouse {
 		
 		ProductsOrder pOrder = order.productsOrder.getFirst();
 
-		for (ProductOrder po : this.productsOrder) {
+		for (ProductsOrder po : this.productsOrder) {
 			if (po.product.id == pOrder.product.id) {
-				System.out.println("Warehouse " + this.id + " has " + po.product.nb
+				System.out.println("Warehouse " + this.id + " has " + po.nb
 								   + " products " + po.product.id);
 				
-				return po.product.nb > 0;
+				return po.nb > 0;
 			}
 		}
 		
