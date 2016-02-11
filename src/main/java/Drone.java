@@ -7,7 +7,7 @@ import java.util.List;
 public class Drone {
     public int id,maxLoad,x,y,nbTurn;
     public List<Product> currentLoad = new LinkedList<>();
-    public List<Command> commands = new LinkedList<>();
+    public List<Order> orders = new LinkedList<>();
     public State state;
 
     public void timeToWarehouse(Warehouse w) {
@@ -23,7 +23,7 @@ public class Drone {
                 ", y=" + y +
                 ", nbTurn=" + nbTurn +
                 ", currentLoad=" + currentLoad +
-                ", commands=" + commands +
+                ", orders=" + orders +
                 '}';
     }
     

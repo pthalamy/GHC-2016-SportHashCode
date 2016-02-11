@@ -44,7 +44,7 @@ public class Parser {
         }
         nb = sc.nextInt();
         for (int i = 0; i < nb; i++) {
-            Command c = new Command();
+            Order c = new Order();
             c.x = sc.nextInt();
             c.y = sc.nextInt();
             nb2 = sc.nextInt();
@@ -54,7 +54,7 @@ public class Parser {
                 quantity++;
                 c.products.put(d.products.get(product),quantity);
             }
-            d.commands.add(c);
+            d.orders.add(c);
 
         }
 		
