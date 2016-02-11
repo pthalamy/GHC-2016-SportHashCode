@@ -58,7 +58,8 @@ public class Drone {
         // on fait séquentiellement
         if (this.orders.isEmpty()) {
             if (data.orders.size() > 0) {
-                this.orders.add(data.orders.pop());
+                this.orders.add(data.getBestOrder(this));
+
             } else {
                 log("Plus de commande à satisfaire");
                 

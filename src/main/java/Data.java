@@ -14,6 +14,22 @@ public class Data {
     public LinkedList<Warehouse> warehouses = new LinkedList<>();
     public LinkedList<Order> orders = new LinkedList<>();
 
+
+    public Order getBestOrder(Drone actual) {
+	Order bestOrder = this.orders.getFirst(); 
+	for (Order o: this.orders) {
+	    if (o.productsOrder.size() < bestOrder.productsOrder.size())
+		bestOrder = o;
+	    else if (o.productsOrder.size() == bestOrder.productsOrder.size()){
+	    	if (o.numberOfProducts() < bestOrder.numberOfProducts())
+	    	    bestOrder = o;
+	    }
+		
+	}
+	orders.remove(bestOrder);
+	return bestOrder;
+    }
+    
     @Override
     public String toString() {
         return "Data{" +
