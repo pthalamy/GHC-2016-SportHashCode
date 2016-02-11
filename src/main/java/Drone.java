@@ -54,11 +54,23 @@ public class Drone {
 
     private void init(Data data) {
         // on fait séquentiellement
-        if (this.nbTurn == 0) {
+        if (this.orders.isEmpty()) {
             if (data.orders.size() > 0) {
-                this.orders.add(data.orders.pop());
-                this.nbTurn = 
+                Order currentOrder = data.orders.pop();
+                this.orders.add(currentOrder);
+                
+                Warehouse warehouse = data.closestWarehouseForOrder(currentOrder);
+                
+                this.nbTurn = timeToDest(warehouse.x, warehouse.y);
+                log("Satisfait " + currentOrder + ", goto warehouse " + warehouse.id);
+            } else {
+                log("Plus de commande à satisfaire");
             }
+        } else if (this.nbTurn == 0) {
+            this.state = State.LOADING;
+            loading(data);
+        } else {
+            this.nbTurn--;
         }
     }
 
@@ -72,5 +84,9 @@ public class Drone {
 
     private void loading(Data data) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    public void log(String msg) {
+        System.out.println("[Drone " + id + "]");
     }
 }
