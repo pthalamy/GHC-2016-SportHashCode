@@ -15,6 +15,9 @@ public class Main {
 
 		Data d = Parser.parse(inputFileName);
 
+		for (int i = 0; i < d.turns; i++) {
+			d.drones.forEach(dr -> dr.update(d));
+		}
 
 		Writer.writeInFile(getOutputFileName(inputFileName));
 	}
