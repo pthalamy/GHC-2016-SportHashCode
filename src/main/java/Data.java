@@ -25,8 +25,13 @@ public class Data {
                 '}';
     }
 
-	public Warehouse closestWarehouseForOrder(Order order) {
+	public Warehouse closestWarehouseForOrder(Drone drone, Order order) {
+		Warehouse closestWarehouse = this.warehouses.getFirst();
 		
-		
+		for (Warehouse w : this.warehouses) {
+			
+		}
+
+		return closestWarehouse;
 	}
 }
