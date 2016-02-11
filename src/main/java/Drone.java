@@ -11,6 +11,10 @@ public class Drone {
     public LinkedList<Order> orders = new LinkedList<>();
     public State state;
 
+    public void timeToWarehouse(Warehouse w) {
+	
+    }
+    
     @Override
     public String toString() {
         return "Drone{" +
