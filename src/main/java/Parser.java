@@ -40,6 +40,7 @@ public class Parser {
                 if(quantity != 0)
                     h.products.put(d.products.get(j),quantity);
             }
+            d.warehouses.add(h);
         }
         nb = sc.nextInt();
         for (int i = 0; i < nb; i++) {
@@ -53,6 +54,8 @@ public class Parser {
                 quantity++;
                 c.products.put(d.products.get(product),quantity);
             }
+            d.commands.add(c);
+
         }
 		
         return d;
