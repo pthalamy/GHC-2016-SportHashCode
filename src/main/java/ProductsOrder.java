@@ -11,4 +11,12 @@
 class ProductsOrder {
     public Product product;
     public int nb;
+
+    @Override
+    public String toString() {
+        return "ProductsOrder{" +
+                "product=" + product +
+                ", nb=" + nb +
+                '}';
+    }
 }
