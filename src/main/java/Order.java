@@ -8,7 +8,7 @@ import java.util.Map;
  */
 public class Order {
 
-    public int x,y;
+    public int x,y,id;
     public LinkedList<ProductsOrder> productsOrder = new LinkedList<>();
 
     @Override

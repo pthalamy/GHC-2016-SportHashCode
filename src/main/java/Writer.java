@@ -15,6 +15,8 @@ public class Writer {
         try {
             File f = new File(file);
             FileWriter out = new FileWriter(f);
+            out.write(Integer.toString(count));
+            out.write("\n");
             builder.forEach(s -> {
                 try {
                     out.write(s.toString());
@@ -27,6 +29,10 @@ public class Writer {
         } catch (Exception e){
             e.printStackTrace();
         }
+    }
+
+    public synchronized static void add(Command command,Data d){
+        add(command.writeabs(d));
     }
 
     public synchronized static void add(Line l){
