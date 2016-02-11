@@ -9,6 +9,8 @@ public class Data {
 
     public List<Drone> drones = new LinkedList<>();
     public List<Product> products = new LinkedList<>();
+    public List<Warehouse> warehouses = new LinkedList<>();
+    public List<Command> commands = new LinkedList<>();
 
     @Override
     public String toString() {
