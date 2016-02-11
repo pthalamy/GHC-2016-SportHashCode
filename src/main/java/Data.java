@@ -15,11 +15,16 @@ public class Data {
     public LinkedList<Order> orders = new LinkedList<>();
 
 
-    public Order getBestOrder() {
+    public Order getBestOrder(Drone actual) {
 	Order bestOrder = this.orders.getFirst(); 
 	for (Order o: this.orders) {
-	    if (o.productsOrder.size() < bestOrder.productsOrder.size())
+	    if (o.numberOfProducts() < bestOrder.numberOfProducts())
 		bestOrder = o;
+	    else if (o.numberOfProducts() == bestOrder.numberOfProducts()){
+		if (actual.timeToDest(o.x, o.y) < actual.timeToDest(bestOrder.x, bestOrder.y))
+		    bestOrder = o;
+	    }
+		
 	}
 	orders.remove(bestOrder);
 	return bestOrder;
