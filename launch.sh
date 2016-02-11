@@ -1,2 +1,15 @@
 #! /bin/sh
-mvn exec:java -Dexec.mainClass="Main" -Dexec.args="$1" -q
+
+class="Main"
+if [ "$#" -ne 1 ]; then
+	class="$1"
+fi
+
+shift
+
+cd target/classes
+java "$class" "$1"
+
+if [ "$?" -ne 0 ]; then
+	echo "usage : launch [MainClass] arg"
+fi;
