@@ -53,34 +53,35 @@ public class Drone {
         // on fait séquentiellement
         if (this.orders.isEmpty()) {
             if (data.orders.size() > 0) {
-                Order currentOrder = data.orders.pop();
-                this.orders.add(currentOrder);
-                
-                targetedWarehouse = data.closestWarehouseForOrder(this, currentOrder);
-                
-                // On charge uniquement un produit
-                ProductsOrder po = this.orders.getFirst().productsOrder.getFirst();
-                if (po.nb == 1) {
-                    this.orders.getFirst().productsOrder.pop();
-                } else {
-                    po.nb--;
-                }
-                this.currentLoad.add(po.product);
-                
-                // On charge 1 produit
-                LoadCommand loadCmd = new LoadCommand(this, po.product, 1, targetedWarehouse);
-                loadCmd.write(data);
+                this.orders.add(data.orders.pop());
 
-                this.nbTurn = timeToDest(targetedWarehouse.x, targetedWarehouse.y);
-                
-                this.state = State.LOADING;
-                
-                
-                log("Charge depuis " + targetedWarehouse + " 1 " + po.product + " dans " + this.nbTurn);
             } else {
                 log("Plus de commande à satisfaire");
+                
+                return;
             }
         }
+        
+        targetedWarehouse = data.closestWarehouseForOrder(this, this.orders.getFirst());
+
+        // On charge uniquement un produit
+        ProductsOrder po = this.orders.getFirst().productsOrder.getFirst();
+        if (po.nb == 1) {
+            this.orders.getFirst().productsOrder.pop();
+        } else {
+            po.nb--;
+        }
+        this.currentLoad.add(po.product);
+
+        // On charge 1 produit
+        LoadCommand loadCmd = new LoadCommand(this, po.product, 1, targetedWarehouse);
+        loadCmd.write(data);
+
+        this.nbTurn = timeToDest(targetedWarehouse.x, targetedWarehouse.y) + 1;
+
+        this.state = State.LOADING;
+
+        log("Charge depuis " + targetedWarehouse + " 1 " + po.product + " dans " + this.nbTurn);
     }
 
     private void delivering(Data data) {
@@ -89,7 +90,10 @@ public class Drone {
             // Arrived at the destination and delivered
             this.currentLoad.clear();
             
-            Order currentOrder = this.orders.pop();
+            Order currentOrder = this.orders.getFirst();
+            if (currentOrder.productsOrder.isEmpty()) {
+                this.orders.pop();
+            }
             
             this.x = currentOrder.x;
 	    this.y = currentOrder.y;
@@ -98,7 +102,9 @@ public class Drone {
             
             this.state = State.INIT;
             init(data);
-	}
+	} else {
+            log("Delivering : nbTurn = " + this.nbTurn);
+        }
     }
 
     private void loading(Data data) {
@@ -115,7 +121,9 @@ public class Drone {
             
             this.state = State.DELIVERING;
             this.targetedWarehouse = null;
-            this.nbTurn = this.timeToDest(this.orders.getFirst().x, this.orders.getFirst().y);
+            this.nbTurn = this.timeToDest(this.orders.getFirst().x, this.orders.getFirst().y) + 1;
+        } else {
+            log("Loading : nbTurn = " + this.nbTurn);
         }
     }
     

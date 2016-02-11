@@ -19,6 +19,7 @@ public class Main {
 			System.out.println("Turn #" + i);
 
 			d.drones.forEach(dr -> dr.update(d));
+                        System.out.println(d);
 		}
 
 		Writer.writeInFile(getOutputFileName(inputFileName));
