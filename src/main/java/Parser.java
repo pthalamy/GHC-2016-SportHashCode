@@ -8,8 +8,10 @@ public class Parser {
     public static Object parse(String file){
         Scanner sc = new Scanner(file);
         int firstInt;
+
         if(sc.hasNextInt())
-             firstInt = sc.nextInt();
+			firstInt = sc.nextInt();
+		
         while(sc.hasNext()) {
             String line = sc.next();
             line = line.trim(); //Si il y a des characteres vides devant (normalement ne fait rien)
@@ -24,6 +26,7 @@ public class Parser {
 
             }
         }
+		
         return null;
     }
 
