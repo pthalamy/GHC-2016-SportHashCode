@@ -20,10 +20,10 @@ public class Data {
 	for (Order o: this.orders) {
 	    if (o.numberOfProducts() < bestOrder.numberOfProducts())
 		bestOrder = o;
-	    else if (o.numberOfProducts() == bestOrder.numberOfProducts()){
-		if (actual.timeToDest(o.x, o.y) < actual.timeToDest(bestOrder.x, bestOrder.y))
-		    bestOrder = o;
-	    }
+	    // else if (o.numberOfProducts() == bestOrder.numberOfProducts()){
+	    // 	if (actual.timeToDest(o.x, o.y) < actual.timeToDest(bestOrder.x, bestOrder.y))
+	    // 	    bestOrder = o;
+	    // }
 		
 	}
 	orders.remove(bestOrder);
