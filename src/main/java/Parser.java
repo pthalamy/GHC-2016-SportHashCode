@@ -1,3 +1,5 @@
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 /**
@@ -5,10 +7,9 @@ import java.util.Scanner;
  */
 public class Parser {
 
-    public static Data parse(String file){
-        Scanner sc = new Scanner(file);
+    public static Data parse(String file) throws FileNotFoundException {
+        Scanner sc = new Scanner(new File(file));
         Data d = new Data();
-
         d.row = sc.nextInt();
 		d.column = sc.nextInt();
         d.nbDrone = sc.nextInt();
@@ -55,6 +56,11 @@ public class Parser {
         }
 		
         return d;
+    }
+
+    public static void main(String[] args) throws FileNotFoundException {
+        Data d = parse(args[0]);
+        System.out.println(d);
     }
 
 

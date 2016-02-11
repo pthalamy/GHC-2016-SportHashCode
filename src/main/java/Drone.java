@@ -8,6 +8,7 @@ public class Drone {
     public int id,maxLoad,x,y,nbTurn;
     public List<Product> currentLoad = new LinkedList<>();
     public List<Command> commands = new LinkedList<>();
+    public State state;
 
     @Override
     public String toString() {

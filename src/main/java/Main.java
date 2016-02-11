@@ -1,8 +1,8 @@
-
+import java.io.FileNotFoundException;
 
 public class Main {
 
-	public static void main(String[] args){
+	public static void main(String[] args) throws FileNotFoundException {
         if (args.length < 1) {
             System.err.println("error: missing parameter: input file");
             System.err.println("usage: launch.sh input.in");
@@ -13,7 +13,7 @@ public class Main {
 		
 		System.out.println("Output File Name: " + getOutputFileName(inputFileName));
 
-		// Parser.parse(inputFileName);
+		Data d = Parser.parse(inputFileName);
 
 		
 	}
