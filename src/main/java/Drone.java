@@ -62,22 +62,25 @@ public class Drone {
                 
                 targetedWarehouse = data.closestWarehouseForOrder(this, currentOrder);
                 
-                if (targetedWarehouse.id == 0) {
-                    log("Pas besoin de bouger");
-                    this.state = State.LOADING;
+                // On charge uniquement un produit
+                ProductsOrder po = this.orders.getFirst().productsOrder.getFirst();
+                if (po.nb == 1) {
+                    this.orders.getFirst().productsOrder.pop();
                 } else {
-                     this.nbTurn = timeToDest(targetedWarehouse.x, targetedWarehouse.y);
-                    log("Satisfait " + currentOrder + ", goto warehouse " + targetedWarehouse);
-                    //Command cmd = new LoadCommand();
+                    po.nb--;
                 }
+                this.currentLoad.add(po.product);
+                
+                // On charge 1 produit
+                LoadCommand loadCmd = new LoadCommand(this, po.product, 1, targetedWarehouse);
+                loadCmd.write(data);
+
+                this.nbTurn = timeToDest(targetedWarehouse.x, targetedWarehouse.y);
+                
+                log("Charge depuis " + targetedWarehouse + " 1 " + po.product + " dans " + this.nbTurn);
             } else {
                 log("Plus de commande à satisfaire");
             }
-        } else if (this.nbTurn == 0) {
-            log("Arrivé au warehouse");
-            this.state = State.LOADING;
-        } else {
-            this.nbTurn--;
         }
     }
 
@@ -90,19 +93,14 @@ public class Drone {
     }
 
     private void loading(Data data) {
-        // On charge uniquement un produit
-        ProductsOrder po = this.orders.getFirst().productsOrder.getFirst();
-        if (po.nb == 1) {
-            this.orders.getFirst().productsOrder.pop();
-        } else {
-            po.nb--;
+        this.nbTurn--;
+        if (this.nbTurn == 0) {
+            log("Chargé");
+            
+            this.state = State.DELIVERING;
+            this.targetedWarehouse = null;
+            this.nbTurn = this.timeToDest(this.orders.getFirst().x, this.orders.getFirst().y);
         }
-        this.currentLoad.add(po.product);
-        this.state = State.DELIVERING;
-        this.targetedWarehouse = null;
-        this.nbTurn = this.timeToDest(this.orders.getFirst().x, this.orders.getFirst().y);
-        
-        log("A chargé depuis " + targetedWarehouse + " 1 " + po.product);
     }
     
     public void log(String msg) {
