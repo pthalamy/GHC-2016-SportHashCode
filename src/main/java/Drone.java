@@ -11,8 +11,12 @@ public class Drone {
     public LinkedList<Order> orders = new LinkedList<>();
     public State state;
 
-    public void timeToWarehouse(Warehouse w) {
+    public int timeToDest(int xDest, int yDest) {
+	double dist = Math.sqrt();
+
 	
+	
+	return Math.round(dist);
     }
     
     @Override
