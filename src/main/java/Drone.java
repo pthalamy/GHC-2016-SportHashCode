@@ -85,7 +85,7 @@ public class Drone {
 	    nbTurn--;
 	else if (this.nbTurn == 0) { // Arrived at the destination
 
-	    Command cmd = new Command(this, this.orders.getFirst(), 1);
+	    Command cmd = new UnloadCommand(this, this.orders.getFirst(), 1);
 	    cmd.write(data);
 
 	    this.orders.remove(); // Remove the first element
