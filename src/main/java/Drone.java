@@ -1,5 +1,6 @@
 import java.util.LinkedList;
 import java.util.List;
+import java.lang.Math;
 
 /**
  * Created by guillaume on 11/02/16.
@@ -12,11 +13,10 @@ public class Drone {
     public State state;
 
     public int timeToDest(int xDest, int yDest) {
-	double dist = Math.sqrt();
-
+	double dist = Math.sqrt(Math.pow(Math.abs(xDest - x), 2.0)
+				+ Math.pow(Math.abs(yDest - y), 2.0));
 	
-	
-	return Math.round(dist);
+	return (int)Math.round(dist);
     }
     
     @Override
