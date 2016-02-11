@@ -63,6 +63,11 @@ public class Drone {
         }
         
         targetedWarehouse = data.closestWarehouseForOrder(this, this.orders.getFirst());
+        
+        if (targetedWarehouse == null) {
+            log(this.orders.getFirst().toString());
+            System.out.println(data);
+        }
 
         // On charge uniquement un produit
         ProductsOrder po = this.orders.getFirst().productsOrder.getFirst();
