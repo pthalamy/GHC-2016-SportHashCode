@@ -1,3 +1,4 @@
+import com.sun.security.ntlm.Client;
 import java.util.LinkedList;
 import java.util.List;
 import java.lang.Math;
@@ -11,6 +12,7 @@ public class Drone {
     public LinkedList<Product> currentLoad = new LinkedList<>();
     public LinkedList<Order> orders = new LinkedList<>();
     public State state;
+    public Warehouse targetedWarehouse;
 
     public int timeToDest(int xDest, int yDest) {
 	double dist = Math.sqrt(Math.pow(Math.abs(xDest - x), 2.0)
@@ -59,10 +61,14 @@ public class Drone {
                 Order currentOrder = data.orders.pop();
                 this.orders.add(currentOrder);
                 
-                Warehouse warehouse = data.closestWarehouseForOrder(this, currentOrder);
+                targetedWarehouse = data.closestWarehouseForOrder(this, currentOrder);
                 
-                this.nbTurn = timeToDest(warehouse.x, warehouse.y);
-                log("Satisfait " + currentOrder + ", goto warehouse " + warehouse.id);
+                this.nbTurn = timeToDest(targetedWarehouse.x, targetedWarehouse.y);
+                log("Satisfait " + currentOrder + ", goto warehouse " + targetedWarehouse);
+                if (this.nbTurn == 0) {
+                    log("Pas besoin de bouger");
+                    this.state = State.LOADING;
+                }
             } else {
                 log("Plus de commande à satisfaire");
             }
@@ -83,8 +89,19 @@ public class Drone {
     }
 
     private void loading(Data data) {
-        this.orders.getFirst().products
-        log("A chargé ");
+        // On charge uniquement un produit
+        ProductsOrder po = this.orders.getFirst().productsOrder.getFirst();
+        if (po.nb == 1) {
+            this.orders.getFirst().productsOrder.pop();
+        } else {
+            po.nb--;
+        }
+        this.currentLoad.add(po.product);
+        this.state = State.DELIVERING;
+        this.targetedWarehouse = null;
+        this.nbTurn = this.timeToDest(this.orders.getFirst().x, this.orders.getFirst().y);
+        
+        log("A chargé depuis " + targetedWarehouse + " 1 " + po.product);
     }
     
     public void log(String msg) {
