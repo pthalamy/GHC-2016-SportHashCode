@@ -66,8 +66,8 @@ public class Parser {
                     p = new ProductsOrder();
                     p.product = d.products.get(product);
                     p.nb = 1;
+                    c.productsOrder.add(p);
                 }
-                c.productsOrder.add(p);
             }
             d.orders.add(c);
 
