@@ -7,6 +7,12 @@ public abstract class Command {
     public Product p;
     public int quantity;
 
+    public Command(Drone d, Product p, int quantity) {
+        this.d = d;
+        this.p = p;
+        this.quantity = quantity;
+    }
+
     public abstract char getIdentifier();
 
 
