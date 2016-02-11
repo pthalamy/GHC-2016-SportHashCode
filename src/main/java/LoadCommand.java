@@ -4,6 +4,10 @@ import java.util.Optional;
  * Created by guillaume on 11/02/16.
  */
 public class LoadCommand extends Command {
+    public LoadCommand(Drone d, Product p, int quantity) {
+        super(d, p, quantity);
+    }
+
     @Override
     public char getIdentifier() {
         return 'L';
