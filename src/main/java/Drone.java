@@ -72,6 +72,7 @@ public class Drone {
             po.nb--;
         }
         this.currentLoad.add(po.product);
+        
 
         // On charge 1 produit
         LoadCommand loadCmd = new LoadCommand(this, po.product, 1, targetedWarehouse);
@@ -81,14 +82,14 @@ public class Drone {
 
         this.state = State.LOADING;
 
-        log("Charge depuis " + targetedWarehouse + " 1 " + po.product + " dans " + this.nbTurn);
+        log("Charge depuis " + targetedWarehouse.id + " 1 " + po.product + " dans " + this.nbTurn);
     }
 
     private void delivering(Data data) {
 	nbTurn--;
         if (this.nbTurn == 0) {
             // Arrived at the destination and delivered
-            this.currentLoad.clear();
+            this.currentLoad.pop();
             
             Order currentOrder = this.orders.getFirst();
             if (currentOrder.productsOrder.isEmpty()) {
