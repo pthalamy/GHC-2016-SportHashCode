@@ -18,7 +18,7 @@ public class Drone {
 	double dist = Math.sqrt(Math.pow(Math.abs(xDest - x), 2.0)
 				+ Math.pow(Math.abs(yDest - y), 2.0));
 	
-	return (int)Math.round(dist);
+	return (int)Math.ceil(dist);
     }
     
     @Override
@@ -63,11 +63,13 @@ public class Drone {
                 
                 targetedWarehouse = data.closestWarehouseForOrder(this, currentOrder);
                 
-                this.nbTurn = timeToDest(targetedWarehouse.x, targetedWarehouse.y);
-                log("Satisfait " + currentOrder + ", goto warehouse " + targetedWarehouse);
-                if (this.nbTurn == 0) {
+                if (targetedWarehouse.id == 0) {
                     log("Pas besoin de bouger");
                     this.state = State.LOADING;
+                } else {
+                     this.nbTurn = timeToDest(targetedWarehouse.x, targetedWarehouse.y);
+                    log("Satisfait " + currentOrder + ", goto warehouse " + targetedWarehouse);
+                    //Command cmd = new LoadCommand();
                 }
             } else {
                 log("Plus de commande à satisfaire");
