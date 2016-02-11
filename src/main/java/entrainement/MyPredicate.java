@@ -1,3 +1,4 @@
+package entrainement;
 
 import java.util.function.Predicate;
 

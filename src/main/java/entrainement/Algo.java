@@ -1,6 +1,6 @@
+package entrainement;
 
 import static java.util.Locale.filter;
-import java.util.function.Predicate;
 
 
 

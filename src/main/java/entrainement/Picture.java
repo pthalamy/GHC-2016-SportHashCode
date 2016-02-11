@@ -1,3 +1,5 @@
+package entrainement;
+
 import java.util.Arrays;
 
 public class Picture {
