@@ -1,5 +1,6 @@
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.Optional;
 import java.util.Scanner;
 
 /**
@@ -37,22 +38,35 @@ public class Parser {
             }
             for (int j = 0; j < nb; j++) {
                 int quantity = sc.nextInt();
-                if(quantity != 0)
-                    h.products.put(d.products.get(j),quantity);
+                if(quantity != 0) {
+                    ProductsOrder pd = new ProductsOrder();
+                    pd.nb = quantity;
+                    pd.product = d.products.get(j);
+                    h.productsOrder.add(pd);
+                }
             }
             d.warehouses.add(h);
         }
         nb = sc.nextInt();
         for (int i = 0; i < nb; i++) {
             Order c = new Order();
+            c.id = i;
             c.x = sc.nextInt();
             c.y = sc.nextInt();
             nb2 = sc.nextInt();
             for (int j = 0; j < nb2; j++) {
                 int product = sc.nextInt();
-                int quantity = c.products.getOrDefault(d.products.get(product),0);
-                quantity++;
-                c.products.put(d.products.get(product),quantity);
+                Optional<ProductsOrder> pd = c.productsOrder.stream().filter(o -> o.product == d.products.get(product)).findFirst();
+                ProductsOrder p;
+                if(pd.isPresent()){
+                    p = pd.get();
+                    p.nb++;
+                } else {
+                    p = new ProductsOrder();
+                    p.product = d.products.get(product);
+                    p.nb = 1;
+                }
+                c.productsOrder.add(p);
             }
             d.orders.add(c);
 
