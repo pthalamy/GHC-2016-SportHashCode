@@ -21,6 +21,20 @@ public class Warehouse {
     }
 
 	public boolean hasStockForOrder(Order order) {
-		throw new UnsupportedOperationException("NYI");
+		if (order == null)
+			return true; // We only need closest Warehouse
+		
+		ProductsOrder pOrder = order.productsOrder.getFirst();
+
+		for (ProductOrder po : this.productsOrder) {
+			if (po.product.id == pOrder.product.id) {
+				System.out.println("Warehouse " + this.id + " has " + po.product.nb
+								   + " products " + po.product.id);
+				
+				return po.product.nb > 0;
+			}
+		}
+		
+		return false;
 	}
 }
