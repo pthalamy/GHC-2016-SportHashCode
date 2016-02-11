@@ -6,14 +6,14 @@ import java.util.Map;
 /**
  * Created by guillaume on 11/02/16.
  */
-public class Command {
+public class Order {
 
     public int x,y;
     public Map<Product,Integer> products = new HashMap<>();
 
     @Override
     public String toString() {
-        return "Command{" +
+        return "Order{" +
                 "x=" + x +
                 ", y=" + y +
                 ", products=" + products +
