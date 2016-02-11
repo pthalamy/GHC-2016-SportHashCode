@@ -8,7 +8,15 @@ import java.util.Map;
  */
 public class Warehouse {
     public int x,y,id;
-    public Map<Integer,Product> products = new HashMap<>();
+    public Map<Product,Integer> products = new HashMap<>();
 
-
+    @Override
+    public String toString() {
+        return "Warehouse{" +
+                "x=" + x +
+                ", y=" + y +
+                ", id=" + id +
+                ", products=" + products +
+                '}';
+    }
 }

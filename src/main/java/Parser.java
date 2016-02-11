@@ -5,29 +5,56 @@ import java.util.Scanner;
  */
 public class Parser {
 
-    public static Object parse(String file){
+    public static Data parse(String file){
         Scanner sc = new Scanner(file);
-        int firstInt;
+        Data d = new Data();
 
-        if(sc.hasNextInt())
-			firstInt = sc.nextInt();
-		
-        while(sc.hasNext()) {
-            String line = sc.next();
-            line = line.trim(); //Si il y a des characteres vides devant (normalement ne fait rien)
-            for (int i = 0; i < line.length(); i++) {
-                char c = line.charAt(i);
-                //Si un charactere est un delimiter
-                String[] tab = line.split(",");//si , est le delimiter
-                for (int j = 0; j < tab.length; j++) {
-                    Integer.parseInt(tab[i]);
+        d.row = sc.nextInt();
+		d.column = sc.nextInt();
+        d.nbDrone = sc.nextInt();
+        d.turns = sc.nextInt();
+        d.maxLoad = sc.nextInt();
+        int nb;
+        nb = sc.nextInt();
+        for (int i = 0; i < nb; i++) {
+            Product p = new Product(i,sc.nextInt());
+            d.products.add(p);
+        }
+        int nb2 = sc.nextInt();
+        for (int i = 0; i < nb2; i++) {
+            Warehouse h = new Warehouse();
+            h.id = i;
+            h.x = sc.nextInt();
+            h.y = sc.nextInt();
+            if(i == 0){
+                for(int t = 0; t < d.nbDrone;t++){
+                    Drone a = new Drone();
+                    a.x = h.x;
+                    a.y = h.y;
+                    d.drones.add(a);
                 }
-
-
+            }
+            for (int j = 0; j < nb; j++) {
+                int quantity = sc.nextInt();
+                if(quantity != 0)
+                    h.products.put(d.products.get(j),quantity);
+            }
+        }
+        nb = sc.nextInt();
+        for (int i = 0; i < nb; i++) {
+            Command c = new Command();
+            c.x = sc.nextInt();
+            c.y = sc.nextInt();
+            nb2 = sc.nextInt();
+            for (int j = 0; j < nb2; j++) {
+                int product = sc.nextInt();
+                int quantity = c.products.getOrDefault(d.products.get(product),0);
+                quantity++;
+                c.products.put(d.products.get(product),quantity);
             }
         }
 		
-        return null;
+        return d;
     }
 
 

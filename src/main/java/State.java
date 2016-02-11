@@ -3,5 +3,5 @@
  */
 public enum State {
 
-    WAIT,LOADING,DELIVERING
+    WAIT,LOADING,DELIVERING,INIT;
 }

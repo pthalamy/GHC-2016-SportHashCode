@@ -9,4 +9,17 @@ public class Data {
 
     public List<Drone> drones = new LinkedList<>();
     public List<Product> products = new LinkedList<>();
+
+    @Override
+    public String toString() {
+        return "Data{" +
+                "row=" + row +
+                ", column=" + column +
+                ", turns=" + turns +
+                ", maxLoad=" + maxLoad +
+                ", nbDrone=" + nbDrone +
+                ", drones=" + drones +
+                ", products=" + products +
+                '}';
+    }
 }

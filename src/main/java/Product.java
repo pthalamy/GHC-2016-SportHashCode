@@ -8,4 +8,12 @@ public class Product {
         this.id = id;
         this.weight = weight;
     }
+
+    @Override
+    public String toString() {
+        return "Product{" +
+                "id=" + id +
+                ", weight=" + weight +
+                '}';
+    }
 }
