@@ -85,7 +85,27 @@ public class Drone {
     }
 
     private void delivering(Data data) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        // throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+	if (this.nbTurn > 0) 	// Still going to the dest
+	    nbTurn--;
+	else if (this.nbTurn == 0) { // Arrived at the destination
+
+	    this.x = targetedWarehouse.x;
+	    this.y = targetedWarehouse.y;
+	    Command cmd = new DeliverCommand(this,
+					     this.currentLoad.getFirst(), 1,
+					     this.orders.getFirst());
+	    cmd.write(data);
+        this.currentLoad.clear();
+        ProductsOrder pd = this.orders.getFirst().productsOrder.get(0);
+        if(pd.nb == 1){
+            this.orders.getFirst().productsOrder.remove(pd);
+        } else {
+            pd.nb--;
+        }
+        this.state = State.LOADING;
+	} else 			// ERROR
+       	    log("ERROR: nbTurn < 0");
     }
 
     private void goingback(Data data) {
