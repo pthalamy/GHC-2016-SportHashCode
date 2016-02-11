@@ -9,7 +9,7 @@ public class Data {
 
     public List<Drone> drones = new LinkedList<>();
     public List<Product> products = new LinkedList<>();
-    public List<Warehouse> warehouses = new LinkedList<>();
+    public LinkedList<Warehouse> warehouses = new LinkedList<>();
     public List<Order> orders = new LinkedList<>();
 
     @Override
@@ -25,8 +25,13 @@ public class Data {
                 '}';
     }
 
-	public Warehouse closestWarehouseForOrder(Order order) {
+	public Warehouse closestWarehouseForOrder(Drone drone, Order order) {
+		Warehouse closestWarehouse = this.warehouses.getFirst();
 		
-		
+		for (Warehouse w : this.warehouses) {
+			
+		}
+
+		return closestWarehouse;
 	}
 }
