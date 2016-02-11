@@ -27,9 +27,16 @@ public class Data {
 
 	public Warehouse closestWarehouseForOrder(Drone drone, Order order) {
 		Warehouse closestWarehouse = this.warehouses.getFirst();
+		int minTTD = drone.timeToDest(closestWarehouse.x, closestWarehouse.y);
+		int currTTD;
 		
 		for (Warehouse w : this.warehouses) {
+			currTTD = drone.timeToDest(w.x, w.y);
 			
+			if (currTTD < minTTD && w.hasStockForOrder(order)) {
+				minTTD = currTTD;
+				closestWarehouse = w;
+			}
 		}
 
 		return closestWarehouse;

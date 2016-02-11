@@ -19,4 +19,8 @@ public class Warehouse {
                 ", products=" + productsOrder +
                 '}';
     }
+
+	public boolean hasStockForOrder(Order order) {
+		throw new UnsupportedOperationException("NYI");
+	}
 }
