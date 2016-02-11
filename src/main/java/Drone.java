@@ -84,10 +84,8 @@ public class Drone {
     }
 
     private void delivering(Data data) {
-        // throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-	if (this.nbTurn > 0) 	// Still going to the dest
-	    nbTurn--;
-	else if (this.nbTurn == 0) {
+	nbTurn--;
+        if (this.nbTurn == 0) {
             // Arrived at the destination and delivered
             this.currentLoad.clear();
             
@@ -96,12 +94,11 @@ public class Drone {
             this.x = currentOrder.x;
 	    this.y = currentOrder.y;
             
-            log("Commande " + currentOrder + " servie");
+            log("Commande " + currentOrder + " servie, passage en INIT");
             
             this.state = State.INIT;
             init(data);
-	} else
-       	    log("ERROR: nbTurn < 0");
+	}
     }
 
     private void loading(Data data) {
@@ -115,7 +112,6 @@ public class Drone {
 					     this.currentLoad.getFirst(), 1,
 					     this.orders.getFirst());
 	    cmd.write(data);
-            this.currentLoad.clear();
             
             this.state = State.DELIVERING;
             this.targetedWarehouse = null;
