@@ -9,14 +9,14 @@ import java.util.Map;
 public class Order {
 
     public int x,y;
-    public Map<Product,Integer> products = new HashMap<>();
+    public LinkedList<ProductsOrder> productsOrder = new LinkedList<>();
 
     @Override
     public String toString() {
         return "Order{" +
                 "x=" + x +
                 ", y=" + y +
-                ", products=" + products +
+                ", products=" + productsOrder +
                 '}';
     }
 }

@@ -8,7 +8,7 @@ import java.util.Map;
  */
 public class Warehouse {
     public int x,y,id;
-    public Map<Product,Integer> products = new HashMap<>();
+    public LinkedList<ProductsOrder> productsOrder = new LinkedList<>();
 
     @Override
     public String toString() {
@@ -16,7 +16,7 @@ public class Warehouse {
                 "x=" + x +
                 ", y=" + y +
                 ", id=" + id +
-                ", products=" + products +
+                ", products=" + productsOrder +
                 '}';
     }
 }

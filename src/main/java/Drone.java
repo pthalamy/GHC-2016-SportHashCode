@@ -59,7 +59,7 @@ public class Drone {
                 Order currentOrder = data.orders.pop();
                 this.orders.add(currentOrder);
                 
-                Warehouse warehouse = data.closestWarehouseForOrder(currentOrder);
+                Warehouse warehouse = data.closestWarehouseForOrder(this, currentOrder);
                 
                 this.nbTurn = timeToDest(warehouse.x, warehouse.y);
                 log("Satisfait " + currentOrder + ", goto warehouse " + warehouse.id);
@@ -83,7 +83,8 @@ public class Drone {
     }
 
     private void loading(Data data) {
-        //
+        this.orders.getFirst().products
+        log("A chargé ");
     }
     
     public void log(String msg) {
