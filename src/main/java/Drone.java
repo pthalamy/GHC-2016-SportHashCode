@@ -10,6 +10,10 @@ public class Drone {
     public List<Command> commands = new LinkedList<>();
     public State state;
 
+    public void timeToWarehouse(Warehouse w) {
+	
+    }
+    
     @Override
     public String toString() {
         return "Drone{" +
