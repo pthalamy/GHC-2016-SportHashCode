@@ -24,4 +24,9 @@ public class Data {
                 ", products=" + products +
                 '}';
     }
+
+	public Warehouse closestWarehouseForOrder(Order order) {
+		
+		
+	}
 }
