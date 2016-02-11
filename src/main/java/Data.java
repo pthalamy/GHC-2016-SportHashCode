@@ -7,6 +7,8 @@ import java.util.List;
 public class Data {
     public int row,column,turns,maxLoad,nbDrone;
 
+	public int currentTurn = 0;
+	
     public LinkedList<Drone> drones = new LinkedList<>();
     public LinkedList<Product> products = new LinkedList<>();
     public LinkedList<Warehouse> warehouses = new LinkedList<>();

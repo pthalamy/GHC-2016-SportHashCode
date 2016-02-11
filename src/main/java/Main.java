@@ -16,10 +16,13 @@ public class Main {
 		Data d = Parser.parse(inputFileName);
 
 		for (int i = 0; i < d.turns; i++) {
-			System.out.println("Turn #" + i);
+			d.currentTurn = i;
+
+			System.out.println(" Turn #" + i);
 
 			d.drones.forEach(dr -> dr.update(d));
                         //System.out.println(d);
+
 		}
 
 		Writer.writeInFile(getOutputFileName(inputFileName));
