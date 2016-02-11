@@ -67,8 +67,8 @@ public class Drone {
                 log("Plus de commande à satisfaire");
             }
         } else if (this.nbTurn == 0) {
+            log("Arrivé au warehouse");
             this.state = State.LOADING;
-            loading(data);
         } else {
             this.nbTurn--;
         }
@@ -83,10 +83,10 @@ public class Drone {
     }
 
     private void loading(Data data) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        //
     }
     
     public void log(String msg) {
-        System.out.println("[Drone " + id + "]");
+        System.out.println("[Drone " + id + "] " + msg);
     }
 }
