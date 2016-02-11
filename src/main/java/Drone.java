@@ -87,15 +87,18 @@ public class Drone {
 
 	    this.x = targetedWarehouse.x;
 	    this.y = targetedWarehouse.y;
-	    
 	    Command cmd = new DeliverCommand(this,
-					     this.orders.getFirst().
-					     productsOrder.getFirst().product, 1,
+					     this.currentLoad.getFirst(), 1,
 					     this.orders.getFirst());
 	    cmd.write(data);
-
-	    this.orders.getFirst().productsOrder.remove(); // Remove the first element of the order
-	    this.state = State.GOINGBACK;
+        this.currentLoad.clear();
+        ProductsOrder pd = this.orders.getFirst().productsOrder.get(0);
+        if(pd.nb == 1){
+            this.orders.getFirst().productsOrder.remove(pd);
+        } else {
+            pd.nb--;
+        }
+        this.state = State.LOADING;
 	} else 			// ERROR
        	    log("ERROR: nbTurn < 0");
     }
