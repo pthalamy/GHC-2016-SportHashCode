@@ -73,6 +73,9 @@ public class Drone {
         }
         this.currentLoad.add(po.product);
         
+        // On retire 1 produit du warehouse
+        targetedWarehouse.removeProduct(po.product, 1);
+        
 
         // On charge 1 produit
         LoadCommand loadCmd = new LoadCommand(this, po.product, 1, targetedWarehouse);
@@ -82,7 +85,7 @@ public class Drone {
 
         this.state = State.LOADING;
 
-        log("Charge depuis " + targetedWarehouse.id + " 1 " + po.product + " dans " + this.nbTurn);
+        log("Charge depuis " + targetedWarehouse.id + " 1 " + po.product + " dans " + this.nbTurn + " tours");
     }
 
     private void delivering(Data data) {

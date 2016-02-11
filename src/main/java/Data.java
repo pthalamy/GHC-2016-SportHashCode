@@ -22,23 +22,30 @@ public class Data {
                 ", nbDrone=" + nbDrone +
                 ", drones=" + drones +
                 ", products=" + products +
+                ", warehouses=" + warehouses +
                 '}';
     }
 
 	public Warehouse closestWarehouseForOrder(Drone drone, Order order) {
-		Warehouse closestWarehouse = this.warehouses.getFirst();
-		int minTTD = drone.timeToDest(closestWarehouse.x, closestWarehouse.y);
-		int currTTD;
-		
-		for (Warehouse w : this.warehouses) {
-			currTTD = drone.timeToDest(w.x, w.y);
-			
-			if (currTTD < minTTD && w.hasStockForOrder(order)) {
-				minTTD = currTTD;
-				closestWarehouse = w;
-			}
-		}
+            Warehouse closestWarehouse = null;
+            int minTTD = -1;
+            int currTTD;
 
-		return closestWarehouse;
+            for (Warehouse w : this.warehouses) {
+                    currTTD = drone.timeToDest(w.x, w.y);
+
+                    if (w.hasStockForOrder(order)) {
+                        if (minTTD == -1 || minTTD < currTTD) {
+                            minTTD = currTTD;
+                            closestWarehouse = w;
+                        }
+                    }
+            }
+            
+            if (closestWarehouse == null) {
+                System.err.println("ERRRREEUUURRR : no closestWarehouseForOrder");
+            }
+
+            return closestWarehouse;
 	}
 }
