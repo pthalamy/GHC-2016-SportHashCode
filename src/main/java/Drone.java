@@ -5,9 +5,10 @@ import java.util.List;
  * Created by guillaume on 11/02/16.
  */
 public class Drone {
-    public int id,maxLoad,x,y,nbTurn;
-    public List<Product> currentLoad = new LinkedList<>();
-    public List<Order> orders = new LinkedList<>();
+    public int id,maxLoad,x,y;
+    int nbTurn = 0;
+    public LinkedList<Product> currentLoad = new LinkedList<>();
+    public LinkedList<Order> orders = new LinkedList<>();
     public State state;
 
     @Override
@@ -44,7 +45,13 @@ public class Drone {
     }
 
     private void init(Data data) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        // on fait séquentiellement
+        if (this.nbTurn == 0) {
+            if (data.orders.size() > 0) {
+                this.orders.add(data.orders.pop());
+                this.nbTurn = 
+            }
+        }
     }
 
     private void delivering(Data data) {

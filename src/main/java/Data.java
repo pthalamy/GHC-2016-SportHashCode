@@ -7,10 +7,10 @@ import java.util.List;
 public class Data {
     public int row,column,turns,maxLoad,nbDrone;
 
-    public List<Drone> drones = new LinkedList<>();
-    public List<Product> products = new LinkedList<>();
-    public List<Warehouse> warehouses = new LinkedList<>();
-    public List<Order> orders = new LinkedList<>();
+    public LinkedList<Drone> drones = new LinkedList<>();
+    public LinkedList<Product> products = new LinkedList<>();
+    public LinkedList<Warehouse> warehouses = new LinkedList<>();
+    public LinkedList<Order> orders = new LinkedList<>();
 
     @Override
     public String toString() {
