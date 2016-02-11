@@ -31,6 +31,7 @@ public class Parser {
             if(i == 0){
                 for(int t = 0; t < d.nbDrone;t++){
                     Drone a = new Drone();
+                    a.id = t;
                     a.x = h.x;
                     a.y = h.y;
                     d.drones.add(a);
