@@ -84,7 +84,10 @@ public class Drone {
 	if (this.nbTurn > 0) 	// Still going to the dest
 	    nbTurn--;
 	else if (this.nbTurn == 0) { // Arrived at the destination
-	    // TODO : Write delivering in the output
+
+	    Command cmd = new Command(this, this.orders.getFirst(), 1);
+	    cmd.write(data);
+
 	    this.orders.remove(); // Remove the first element
 	    this.state = State.GOINGBACK;
 	} else 			// ERROR
