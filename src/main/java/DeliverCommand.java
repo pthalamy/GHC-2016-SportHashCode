@@ -3,8 +3,8 @@ import java.util.Optional;
 /**
  * Created by guillaume on 11/02/16.
  */
-public class UnloadCommand extends Command{
-    public UnloadCommand(Drone d, Product p, int quantity) {
+public class DeliverCommand extends Command{
+    public DeliverCommand(Drone d, Product p, int quantity) {
         super(d, p, quantity);
     }
 
