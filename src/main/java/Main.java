@@ -15,7 +15,8 @@ public class Main {
 
 		Data d = Parser.parse(inputFileName);
 
-		
+
+		Writer.writeInFile(getOutputFileName(inputFileName));
 	}
 
 
