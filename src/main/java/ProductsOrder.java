@@ -19,4 +19,9 @@ class ProductsOrder {
                 ", nb=" + nb +
                 '}';
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        return product == ((ProductsOrder)obj).product;
+    }
 }

@@ -1,6 +1,8 @@
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.lang.Math;
+import java.util.Map;
 
 /**
  * Created by guillaume on 11/02/16.
@@ -8,7 +10,7 @@ import java.lang.Math;
 public class Drone {
     public int id,maxLoad,x,y;
     int nbTurn = 0;
-    public LinkedList<Product> currentLoad = new LinkedList<>();
+    public LinkedList<ProductsOrder> currentLoad = new LinkedList<>();
     public LinkedList<Order> orders = new LinkedList<>();
     public State state = State.INIT;
     public Warehouse targetedWarehouse;
@@ -72,26 +74,47 @@ public class Drone {
         }
 
         // On charge uniquement un produit
-        ProductsOrder po = this.orders.getFirst().productsOrder.getFirst();
-        if (po.nb == 1) {
-            this.orders.getFirst().productsOrder.pop();
-        } else {
-            po.nb--;
-        }
-        this.currentLoad.add(po.product);
-        
-        // On retire 1 produit du warehouse
-        targetedWarehouse.removeProduct(po.product, 1);
-        
+        boolean exit = false;
+        do {
+            ProductsOrder po = this.orders.getFirst().productsOrder.getFirst();
+            if (po.nb == 1) {
+                this.orders.getFirst().productsOrder.pop();
+            } else {
+                po.nb--;
+            }
+            //Create product order with same product
+            ProductsOrder p = new ProductsOrder();
+            p.product = po.product;
+            //Search for it
+            if(this.currentLoad.contains(p)) {
+                ProductsOrder realPO = this.currentLoad.get(this.currentLoad.indexOf(p));
+                realPO.nb++;
+            } else {
+                p.nb=1;
+                this.currentLoad.add(p);
+            }
+            // On retire 1 produit du warehouse
+            targetedWarehouse.removeProduct(po.product, 1);
+            if(!this.orders.getFirst().productsOrder.isEmpty()) {
+                po = this.orders.getFirst().productsOrder.getFirst();
+                if (currentLoad() + po.product.weight <= data.maxLoad && targetedWarehouse.hasStockForOrder(this.orders.getFirst())) {
+                    exit = false;
+                } else {
+                    exit = true;
+                }
+            } else {
+                exit = true;
+            }
+        } while (!exit);
 
-        this.nbTurn = timeToDest(targetedWarehouse.x, targetedWarehouse.y) + 1;
+        this.nbTurn = timeToDest(targetedWarehouse.x, targetedWarehouse.y) + currentLoad.size();
         
         if (data.currentTurn + this.nbTurn < data.turns) {
-            // On charge 1 produit
-            LoadCommand loadCmd = new LoadCommand(this, po.product, 1, targetedWarehouse);
-            loadCmd.write(data);
-
-            log("Charge depuis " + targetedWarehouse.id + " 1 " + po.product + " dans " + this.nbTurn + " tours");
+        	for(ProductsOrder product: currentLoad){
+        	    LoadCommand loadCmd = new LoadCommand(this, product.product, product.nb, targetedWarehouse);
+        	    log("Charge depuis " + targetedWarehouse.id + " 1 " + product.nb + " dans " + this.nbTurn + " tours");
+        	    loadCmd.write(data);
+        	}
 
             this.state = State.LOADING;
         } else {
@@ -99,15 +122,14 @@ public class Drone {
             this.stucked = true;
         }
 
-        
     }
 
     private void delivering(Data data) {
 	nbTurn--;
         if (this.nbTurn == 0) {
             // Arrived at the destination and delivered
-            this.currentLoad.pop();
-            
+            currentLoad.clear();
+
             Order currentOrder = this.orders.getFirst();
             if (currentOrder.productsOrder.isEmpty()) {
                 this.orders.pop();
@@ -132,21 +154,21 @@ public class Drone {
             
             this.x = targetedWarehouse.x;
 	    this.y = targetedWarehouse.y;
-            
-            this.nbTurn = this.timeToDest(this.orders.getFirst().x, this.orders.getFirst().y) + 1;
+
+            this.nbTurn = this.timeToDest(this.orders.getFirst().x, this.orders.getFirst().y) + currentLoad.size();
             if (data.currentTurn + this.nbTurn < data.turns) {
-                Command cmd = new DeliverCommand(this,
-					     this.currentLoad.getFirst(), 1,
-					     this.orders.getFirst());
-                cmd.write(data);
+            	for(ProductsOrder entry : currentLoad){
+            	    Command cmd = new DeliverCommand(this,entry.product,entry.nb,
+            	            this.orders.getFirst());
+            	    cmd.write(data);
+            	}
             } else {
                 log("Plus de temps");
                 this.stucked = true;
             }
-            
+
             this.state = State.DELIVERING;
             this.targetedWarehouse = null;
-            
         } else {
             log("Loading : nbTurn = " + this.nbTurn);
         }
@@ -154,5 +176,21 @@ public class Drone {
     
     public void log(String msg) {
         System.out.println("[Drone " + id + "] " + msg);
+    }
+
+    public int currentLoad(){
+        int res = 0;
+        for (ProductsOrder product : currentLoad) {
+            res += product.product.weight * product.nb;
+        }
+        return res;
+    }
+
+    public int getLoadTime(){
+        int res = 0;
+        for (ProductsOrder product : currentLoad) {
+            res ++;
+        }
+        return res;
     }
 }
